@@ -1,0 +1,69 @@
+################## TO DO ##################
+
+7. Skriv en kort förklaring över hur Er systemdesign/arkitektur kan se ut.
+Behöver ni köpa in produkter eller koppla andra subsystem/tredjepart (i framtiden)?
+8. Ta fram en objektorienterad koddesign.
+Skapa ca 5–20 klasser.
+Använd arv eller interface.
+Rita ett klassdiagram (enligt UML) som beskriver de ingående klasserna.
+9. Använd ett eller flera relevanta designmönster från boken.
+OBS! Ni får inte kopiera kod från boken eller webben rakt av (Copy-Paste = fusk).
+Ni behöver redovisa på vilket sätt Era designmönster är relevanta till lösningen.
+10. Utveckla produkten (implementera källkod)
+Arbeta agilt. Skapa en backlog via t.ex. Trello.
+Använd GitHub. Alla gruppmedlemmar måste checka in kod.
+
+1. OOA
+o Du kan vidareutveckla projektarbetet eller starta ett helt nytt projekt
+från scratch.
+o Skapa en rapport i MS Word baserat på PowerPoint-presentationen.
+o Utforma en detaljerad kravspecifikation genom att lägga till några extra
+krav eller vidareutveckla befintliga krav.
+(Arbeta med minst 2 krav).
+o Uppdatera användningsfallsdiagrammet (UML Use Case Diagram) utifrån
+kravspecifikationen.
+2. OOD
+o Modellera en välstrukturerad objektorienterad koddesign utifrån
+kravspecifikationen.
+§ Uppdatera klassdiagrammet (UML Class Diagram).
+§ Rita nödvändiga relationer (arv, aggregation, komposition).
+3. OOP
+o Tillämpa något designmönster i din kod.
+o Dokumentera och visa när och varför det är lämpligt att använda
+designmönstret.
+
+1. Skapa en PowerPoint-presentation med tydliga rubriker.
+Skapa minst 10 sidor (PowerPoint-bilder).
+Följande måste presenteras:
+1. Idé – vilka vi är (gruppmedlemmar)
+2. Projektmål
+3. Målgrupp och användarbehov
+4. Begränsningar
+5. Kravspecifikation
+6. Användningsfallsdiagram
+7. Systemdesign/Arkitektur
+8. Klassdiagram
+9. Designmönster
+10. Demo (visa slutprodukten)
+Länk till produktens GitHub-Repo (OBS! ej private)
+Spara presentationen som PDF. Använd följande namnkonvention.
+JAVA20-OOAD-Projektarbete-Grupp-XX.pdf
+Ladda upp presentationen till studentportalen senast den 17 december kl. 16.00
+(En presentation per grupp).
+
+***************** DONE *********************
+1. Beskriv Er idé för någon sorts mjukvaruprodukt som ni i gruppen kommit fram till.
+Tips på projektidéer:
+Enklare spel såsom fyra-i-rad, Snake, kortspel, tärningsspel m.m.
+CRM, fakturahantering, skolsystem, banksystem m.m.
+(Ej för avancerat men kraven nedan måste uppfyllas).
+2. Beskriv projektmål.
+3. Definiera målgrupp och användarbehov.
+4. Finns det några begränsningar?
+5. Utforma en enklare kravspecifikation.
+Skriv ner en lista med minst 10 tydliga krav.
+Listan ska innehålla både funktionella och icke-funktionella krav (innehåll).
+Varje krav ska ha ett prioritetsvärde t.ex. Hög/Medel/Låg eller numrerade!
+Ni får komma överens i gruppen hur ni vill göra.
+6. Identifiera några användningsfall som illustrerar de viktigaste funktionerna i systemet
+Rita användningsfallsdiagram (enligt UML) i ett modelleringsverktyg (t.ex. Lucidchart).

@@ -1,0 +1,75 @@
+#################################### ANKBET ASSISTANCE ######################################
+
+1. STRATEGY ( USER NEEDS AND PRODUCT OBJECTIVES)
+What do you want to get out of your product?
+What do your users want to get out of your product?
+
+************** PROJECT DESCRIPTION & GOAL ****************
+A software that assists your sports betting. It keeps track of all your bets, gives immediate
+response to your results and gives an overview of your progress.
+The software should:
+    - give a good overview of your betting history
+    - display your results and progress
+    - store your bets, stats and result
+    - have a convenient way to add a new bet
+
+********* TARGET GROUP OF USERS & THEIR NEEDS ************
+The targeted users of this software ranges from seasoned gamblers to the sport lovers who
+occasionally makes a bet. They want to get a lucid overview of their betting history and profits.
+A simple, not flashy, user interface with an easy enough way to add a new bet. A login function
+that give them access to their data.
+
+##########################################################################
+
+2. SCOPE (FUNCTIONAL SPECIFICATIONS AND CONTENT REQUIREMENTS)
+Reason #1: So You Know What You're Building
+Reason #2: So You Know What You're Not Building
+
+* USER LOGIN (low)
+* ADD GAME & BET (high)
+  categories:
+    - date
+    - sport
+    - league
+    - team1, team2
+    - bet
+    - odds
+    - stake
+* DELETING AND CHANGING FAULTY ADDED BETS (low)
+* GRADING BETS (manually) (high)
+  options:
+    - win
+    - half win
+    - half lose
+    - lose
+    - void
+* RESULT CALCULATION OF GRADED BETS (high)
+    - calculating net win from bet
+    - updating total result and stats
+* ADDING COMMENTS TO BETS (low)
+* DATABASE FOR BETS (medium)
+* DATABASE FOR USERS (low)
+* DATABASE FOR STATS (medium)
+    - result
+    - stats (win/lose/push)
+    - ROI
+    - win%
+* SORTING BETS BY DIFFERENT CATEGORIES (low)
+* LOG OUT (low)
+
+* LINE CHART DISPLAYING RESULT (medium)
+    - ROI
+    - net profit
+* DISPLAY BETTING HISTORY (high)
+* DISPLAY STATS (high)
+* CLEAN SIMPLE DESIGN (low)
+
+
+******************* LIMITATIONS ***********************
+The software will be developed without the ability to register a new user
+and only accessible locally.
+*******************************************************
+
+*************** ARCHITECTURE & SYSTEM DESIGN *************
+A Java based software, using JavaFX . Basically uses MVC pattern
+to control dataflow.

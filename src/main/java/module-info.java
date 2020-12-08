@@ -1,4 +1,4 @@
-module ankBetLog{
+module ankBetLog {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;

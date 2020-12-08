@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ankBetLog.iml" filepath="$PROJECT_DIR$/ankBetLog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ankBet-log.iml" filepath="$PROJECT_DIR$/ankBet-log.iml" />
     </modules>
   </component>
 </project>
