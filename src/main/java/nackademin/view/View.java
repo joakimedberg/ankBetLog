@@ -18,6 +18,7 @@ public class View {
 
     private Stage stage;
     private Parent parent;
+    private PopOver pop;
 
     public View(Stage stage)  {
         this.stage = stage;
@@ -62,10 +63,14 @@ public class View {
             AddBetController controller = loader.getController();
             controller.setView(this);
 
-            PopOver pop = new PopOver(new Pane(parent));
+            pop = new PopOver(new Pane(parent));
             pop.show(button);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void closeAddBetView() {
+        pop.hide();
     }
 }

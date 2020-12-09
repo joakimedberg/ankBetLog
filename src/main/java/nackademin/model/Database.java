@@ -1,24 +1,21 @@
 package nackademin.model;
 
 import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public class Database {
     private static Database database;
     private Connection connection;
     private User user;
     private Statistics statistics;
-    private List<Bet> bets;
+    private LinkedList<Bet> bets;
 
     private Database(){
         connect();
         fetchUser();
         fetchStatistics();
         fetchBets();
+
     }
 
     public static Database getDatabase() {
@@ -30,7 +27,8 @@ public class Database {
 
     private void connect()  {
         try {
-            String url = getClass().getResource("/database.db").toString();
+            String url = String.valueOf(getClass().getResource("/database.db"));
+            System.out.println(getClass().getResource("/database.db"));
             connection = DriverManager.getConnection("jdbc:sqlite:"+url);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -39,7 +37,9 @@ public class Database {
     }
 
     private void fetchUser() {
+
         try {
+
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM user");
 
@@ -51,6 +51,7 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     public User getUser() {
@@ -58,6 +59,7 @@ public class Database {
     }
 
     private void fetchStatistics() {
+
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM statistics");
@@ -69,26 +71,27 @@ public class Database {
             int push = resultSet.getInt("push");
 
             statistics = new Statistics(roi, net, won, lose, push);
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
     public Statistics getStatistics() {
         return statistics;
     }
 
     private void fetchBets() {
+
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM bets");
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
 
-            bets = new ArrayList();
+
+            bets = new LinkedList<>();
 
             while (resultSet.next()) {
                 bets.add(new Bet(resultSet.getInt("id"),
-                        formatter.parse(resultSet.getString("date")),
+                        resultSet.getString("date"),
                         resultSet.getString("sport"),
                         resultSet.getString("league"),
                         resultSet.getString("team1"),
@@ -99,16 +102,59 @@ public class Database {
                         resultSet.getString("line"),
                         resultSet.getDouble("odds"),
                         resultSet.getDouble("stake"),
-                        resultSet.getDouble("net"),
+                        resultSet.getString("net"),
                         resultSet.getString("outcome")));
             }
-        } catch (SQLException | ParseException e) {
+            resultSet.close();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     public List<Bet> getBets() {
-        return bets;
+        return Collections.unmodifiableList(bets);
+    }
+
+    private void insertBet() {
+        String sql = "INSERT INTO bets('id','date','sport',"
+                + "'league', 'team1','team2','period','category'," +
+                " 'bet','line', 'odds', 'stake', 'net', 'outcome') VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+        Bet bet = bets.getLast();
+        try {
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, bet.getId());
+            statement.setString(2, bet.getGame().getDate());
+            statement.setString(3, bet.getGame().getSport());
+            statement.setString(4, bet.getGame().getLeague());
+            statement.setString(5, bet.getGame().getTeam1());
+            statement.setString(6, bet.getGame().getTeam2());
+            statement.setString(7, bet.getPeriod());
+            statement.setString(8, bet.getCategory());
+            statement.setString(9, bet.getBet());
+            statement.setString(10, bet.getLine());
+            statement.setDouble(11, bet.getOdds());
+            statement.setDouble(12, bet.getStake());
+            statement.setString(13, bet.getNet());
+            statement.setString(14, bet.getOutcome());
+            statement.executeUpdate();
+            System.out.println("Bet added to database.");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void addBet(String date, String sport, String league, String team1,
+                       String team2, String period, String category, String bet,
+                       String line, Double odds, Double stake) {
+
+        bets.add(new Bet(bets.size()+1, date, sport, league, team1, team2,
+                period, category, bet, line, odds, stake, "TBD","TBD" ));
+        insertBet();
     }
 
     public void closeConnection() {
@@ -119,4 +165,9 @@ public class Database {
             e.printStackTrace();
         }
     }
+
+    public static void main(String[] args) {
+        new Database();
+    }
 }
+

@@ -1,32 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="149.0" maxWidth="310.0" minHeight="100.0" minWidth="310.0" prefHeight="149.0" prefWidth="310.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nackademin.controller.AddBetController">
+<AnchorPane maxHeight="170.0" maxWidth="330.0" minHeight="100.0" minWidth="310.0" prefHeight="170.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nackademin.controller.AddBetController">
    <children>
-      <Button fx:id="add_Button" layoutX="255.0" layoutY="122.0" mnemonicParsing="false" text="ADD" />
-      <TextField fx:id="sport_Field" layoutX="106.0" layoutY="14.0" maxWidth="100.0" minWidth="100.0" prefHeight="26.0" prefWidth="100.0" promptText="Sport" />
-      <TextField fx:id="league_Field" layoutX="205.0" layoutY="14.0" maxWidth="100.0" minWidth="100.0" prefHeight="26.0" prefWidth="100.0" promptText="League" />
-      <DatePicker fx:id="date_Picker" layoutX="6.0" layoutY="14.0" maxWidth="100.0" minWidth="100.0" prefHeight="26.0" prefWidth="100.0" />
-      <TextField fx:id="team1_Field" layoutX="6.0" layoutY="49.0" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" />
-      <Label layoutX="141.0" layoutY="54.0" prefHeight="16.0" prefWidth="28.0" text="  v. " />
-      <TextField fx:id="team2_Field" layoutX="174.0" layoutY="49.0" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" />
-      <TextField fx:id="line_Field" layoutX="89.0" layoutY="83.0" prefHeight="26.0" prefWidth="47.0" promptText="line" />
-      <TextField fx:id="odds_Field" layoutX="182.0" layoutY="83.0" prefHeight="26.0" prefWidth="47.0" promptText="odds" />
-      <TextField fx:id="stake_Field" layoutX="239.0" layoutY="83.0" prefHeight="26.0" prefWidth="63.0" promptText="stake" />
-      <ChoiceBox layoutX="6.0" layoutY="122.0" prefHeight="26.0" prefWidth="130.0" />
-      <MenuButton fx:id="category_MenuButton" layoutX="6.0" layoutY="83.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="84.0">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
+      <Button fx:id="add_Button" layoutX="271.0" layoutY="120.0" mnemonicParsing="false" onAction="#addBet" text="ADD" />
+      <TextField fx:id="sport_Field" layoutX="36.0" layoutY="14.0" maxWidth="123.0" minWidth="100.0" prefHeight="26.0" prefWidth="123.0" promptText="Sport" />
+      <TextField fx:id="league_Field" layoutX="158.0" layoutY="14.0" maxWidth="163.0" minWidth="100.0" prefHeight="26.0" prefWidth="163.0" promptText="League" />
+      <DatePicker fx:id="date_Picker" layoutX="6.0" layoutY="14.0" maxWidth="111.0" minWidth="28.0" onHiding="#setDateLabel" prefHeight="26.0" prefWidth="28.0" />
+      <TextField fx:id="team1_Field" layoutX="6.0" layoutY="49.0" maxWidth="140.0" minWidth="130.0" prefHeight="26.0" prefWidth="140.0" />
+      <Label layoutX="146.0" layoutY="54.0" prefHeight="16.0" prefWidth="28.0" text="  v. " />
+      <TextField fx:id="team2_Field" layoutX="174.0" layoutY="49.0" maxWidth="146.0" minWidth="130.0" prefHeight="26.0" prefWidth="146.0" />
+      <TextField fx:id="line_Field" layoutX="160.0" layoutY="83.0" prefHeight="26.0" prefWidth="47.0" promptText="line" />
+      <TextField fx:id="odds_Field" layoutX="208.0" layoutY="83.0" prefHeight="26.0" prefWidth="47.0" promptText="odds" />
+      <TextField fx:id="stake_Field" layoutX="255.0" layoutY="83.0" prefHeight="26.0" prefWidth="65.0" promptText="stake" />
+      <MenuButton fx:id="category_MenuButton" layoutX="65.0" layoutY="83.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0">
+         <items>
+            <Menu mnemonicParsing="false" text="3WAY">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#setCategory" text="1" />
+                  <MenuItem mnemonicParsing="false" onAction="#setCategory" text="X" />
+                  <MenuItem mnemonicParsing="false" onAction="#setCategory" text="2" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="HCP">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#setCategory" text="1" />
+                  <MenuItem mnemonicParsing="false" onAction="#setCategory" text="2" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="OU">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#setCategory" text="Over" />
+                  <MenuItem mnemonicParsing="false" onAction="#setCategory" text="Under" />
+              </items>
+            </Menu>
+         </items>
       </MenuButton>
+      <MenuButton fx:id="period_MenuButton" layoutX="7.0" layoutY="83.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="57.0">
+         <items>
+            <MenuItem fx:id="ft_MenuItem" mnemonicParsing="false" onAction="#setPeriod" text="FT" />
+            <MenuItem fx:id="ml_MenuItem" mnemonicParsing="false" onAction="#setPeriod" text="ML" />
+         </items>
+      </MenuButton>
+      <VBox fx:id="betDetails_Box" layoutX="7.0" layoutY="116.0" prefHeight="49.0" prefWidth="257.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="date_Label" prefHeight="16.0" prefWidth="57.0" />
+                  <Label fx:id="sport_Label" prefHeight="16.0" prefWidth="94.0" />
+                  <Label fx:id="league_Label" prefHeight="16.0" prefWidth="108.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="period_Label" prefHeight="16.0" prefWidth="28.0" />
+                  <Label fx:id="team1_Label" prefHeight="16.0" prefWidth="110.0" />
+                  <Label fx:id="versus_Label" prefHeight="16.0" prefWidth="20.0" />
+                  <Label fx:id="team2_Label" prefHeight="16.0" prefWidth="129.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

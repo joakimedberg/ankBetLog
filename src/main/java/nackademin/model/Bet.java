@@ -4,23 +4,23 @@ import java.util.Date;
 public class Bet {
 
     private int id;
-    private String outcome, bet, period, category, line;
-    private double odds, stake, net;
+    private String outcome, bet, period, category, line, net;
+    private Double odds, stake;
     private Game game;
 
-    public Bet(int id, Date date, String sport, String league, String team1, String team2, String period, String category, String bet,String line, double odds, double stake, double net, String outcome) {
+    protected Bet(int id, String date, String sport, String league, String team1, String team2, String period, String category, String bet,String line, Double odds, Double stake, String net,String outcome) {
 
-        game = new Game(id, date, sport, league, team1, team2);
+        game = new Game(date, sport, league, team1, team2);
 
         this.id = id;
         this.odds = odds;
         this.stake = stake;
-        this.net = net;
         this.bet = bet;
-        this.outcome = outcome;
         this.period = period;
         this.category = category;
         this.line = line;
+        this.net = net;
+        this.outcome = outcome;
     }
 
     public String getLine() {
@@ -39,12 +39,8 @@ public class Bet {
         return game;
     }
 
-    public void calculateNet() {
-        net = odds * stake;
-    }
-
-    public void setNet(double net) {
-        this.net = net;
+    private void calculateNet() {
+        net = String.valueOf(odds * stake);
     }
 
     public int getId() {
@@ -59,7 +55,7 @@ public class Bet {
         return stake;
     }
 
-    public double getNet() {
+    public String getNet() {
         return net;
     }
 
@@ -69,6 +65,7 @@ public class Bet {
 
     public void setOutcome(String outcome) {
         this.outcome = outcome;
+        calculateNet();
     }
 
     public String getBet() {

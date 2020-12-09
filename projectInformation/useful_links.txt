@@ -1,15 +1,21 @@
+Javafx css ref
+https://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html
+
 UML Artifact
 https://www.uml-diagrams.org/artifact.html
 
-Javafx TableView
+SQLite
+https://stackoverflow.com/questions/44399125/sqlite-jdbc-database-in-resource-folder-will-not-update
+
+Javafx
 https://docs.oracle.com/javafx/2/ui_controls/table-view.htm
+https://stackoverflow.com/questions/24627522/protect-arraylist-from-write-access
 https://stackoverflow.com/questions/30334450/cannot-convert-from-string-to-observablevaluestring
 https://stackoverflow.com/questions/19209155/populating-a-javafx-tableview-when-not-all-the-properties-are-in-the-same-class
 https://stackoverflow.com/questions/43251011/javafx-populating-tableview-with-data-from-different-classes
 https://stackoverflow.com/questions/42469386/how-to-update-javafx-tableview-if-nested-object-binding-changes
 https://stackoverflow.com/questions/43819845/javafx-tableview-holding-two-kinds-of-objects
 https://stackoverflow.com/questions/23571747/tableview-with-different-objects-javafx
-- https://stackoverflow.com/questions/23044935/java-lang-illegalargumentexception-children-duplicate-children-added-parent
-
-Tableview uses Number instead of Integer
+https://stackoverflow.com/questions/23044935/java-lang-illegalargumentexception-children-duplicate-children-added-parent
 https://stackoverflow.com/questions/24889638/javafx-properties-in-tableview
+https://stackoverflow.com/questions/30160899/value-change-listener-for-javafxs-textfield

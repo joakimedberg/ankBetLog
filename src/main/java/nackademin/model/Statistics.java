@@ -6,7 +6,7 @@ public class Statistics {
     private int won, lose, push;
 
 
-    public Statistics(double roi, double net, int won, int lose, int push) {
+    protected Statistics(double roi, double net, int won, int lose, int push) {
         this.roi = roi;
         this.net = net;
         this.won = won;

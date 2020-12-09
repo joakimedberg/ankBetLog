@@ -80,7 +80,7 @@ public class PrimaryController extends Controller {
     private void initTable() {
         count = 0;
         id_Column.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getBet().getId()));
-        date_Column.setCellValueFactory(cellData -> new SimpleStringProperty(new SimpleDateFormat("dd/MM/yy").format(cellData.getValue().getGame().getDate())));
+        date_Column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGame().getDate()));
         /* TODO
             competition is initially empty.
             just updates twice, one each.
@@ -130,8 +130,10 @@ public class PrimaryController extends Controller {
                         setGraphic(null);
                     } else {
                         DataForTable data = getTableView().getItems().get(getIndex());
-
+                        team1.setText(data.getGame().getTeam1());
+                        team2.setText(data.getGame().getTeam2());
                         period.setText(data.getBet().getPeriod());
+                        /*
                         if (data.getBet().getCategory().equals("hcp")) {
                             if (data.getBet().getBet().equals("1")) {
                                 team1.setStyle("-fx-font-weight : bold;");
@@ -143,7 +145,7 @@ public class PrimaryController extends Controller {
                                 team1.setText(data.getGame().getTeam2());
                             }
                         }
-
+                        */
                         setPrefHeight(flow.prefHeight(game_Column.getWidth()) + 4);
                         setGraphic(flow);
                     }
@@ -164,9 +166,12 @@ public class PrimaryController extends Controller {
                         DataForTable data = getTableView().getItems().get(getIndex());
 
                         setText(String.valueOf(data.getBet().getNet()));
-                        if (data.getBet().getNet() < 0.0) {
+                        if (data.getBet().getNet().equals("TBD")) {
+                            setText("TBD");
+                        }
+                        else if (Double.valueOf(data.getBet().getNet()) < 0.0) {
                             setTextFill(Color.RED);
-                        } else if (data.getBet().getNet() == 0.0) {
+                        } else if (Double.valueOf(data.getBet().getNet()) == 0.0) {
                             setTextFill(Color.BLACK);
                         } else
                             setTextFill(Color.GREEN);

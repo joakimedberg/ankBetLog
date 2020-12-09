@@ -18,10 +18,10 @@
                 <TableColumn fx:id="id_Column" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" resizable="false" text="ID" />
                 <TableColumn fx:id="date_Column" maxWidth="80.0" minWidth="80.0" resizable="false" text="DATE" />
                 <TableColumn fx:id="competition_Column" prefWidth="115.0" text="COMPETITION" />
-                <TableColumn fx:id="game_Column" prefWidth="145.0" text="GAME" />
-                <TableColumn fx:id="odds_Column" prefWidth="68.0" text="ODDS" />
-                <TableColumn fx:id="stake_Column" prefWidth="121.0" text="STAKE" />
-                <TableColumn fx:id="net_Column" prefWidth="68.0" text="NET" />
+                <TableColumn fx:id="game_Column" prefWidth="319.0" text="GAME" />
+                <TableColumn fx:id="odds_Column" prefWidth="53.0" text="ODDS" />
+                <TableColumn fx:id="stake_Column" prefWidth="63.0" text="STAKE" />
+                <TableColumn fx:id="net_Column" prefWidth="56.0" text="NET" />
             </columns>
         </TableView>
         <LineChart layoutY="435.0" prefHeight="165.0" prefWidth="800.0">
@@ -32,8 +32,8 @@
                 <NumberAxis side="LEFT" />
             </yAxis>
         </LineChart>
-        <Button fx:id="addbet_Button" layoutX="362.0" layoutY="72.0" mnemonicParsing="false" onAction="#addbet" text="ADD BET" />
-        <ImageView layoutY="34.0">
+        <Button fx:id="addbet_Button" layoutX="78.0" layoutY="1.0" mnemonicParsing="false" onAction="#addbet" text="ADD BET" />
+        <ImageView layoutX="7.0" layoutY="34.0">
             <image>
                 <Image url="@duck.png" />
             </image>
@@ -42,6 +42,6 @@
         <Label fx:id="roi_Label" alignment="CENTER" layoutX="630.0" layoutY="34.0" prefHeight="16.0" prefWidth="171.0" text="ROI:" />
         <Label fx:id="net_Label" alignment="CENTER" layoutX="630.0" layoutY="50.0" prefHeight="16.0" prefWidth="171.0" text="NET:" />
         <Label fx:id="stats_Label" alignment="CENTER" layoutX="630.0" layoutY="64.0" prefHeight="16.0" prefWidth="171.0" text="STATS:" />
-        <Button fx:id="logout_Button" layoutX="2.0" layoutY="1.0" mnemonicParsing="false" onAction="#logout" text="LOG OUT" />
+        <Button fx:id="logout_Button" layoutY="1.0" mnemonicParsing="false" onAction="#logout" text="LOG OUT" />
     </children>
 </AnchorPane>

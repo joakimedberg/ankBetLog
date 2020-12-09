@@ -5,10 +5,10 @@ import java.util.Date;
 public class Game {
 
     private int id;
-    private Date date;
+    private String date;
     private String sport, league, team1, team2;
 
-    public Game(int id,Date date, String sport, String league, String team1, String team2) {
+    protected Game(String date, String sport, String league, String team1, String team2) {
         this.id = id;
         this.date = date;
         this.sport = sport;
@@ -17,11 +17,7 @@ public class Game {
         this.team2 = team2;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
