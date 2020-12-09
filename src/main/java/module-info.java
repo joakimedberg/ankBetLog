@@ -2,6 +2,7 @@ module ankBetLog {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires org.controlsfx.controls;
 
     opens nackademin to javafx.fxml;
     opens nackademin.controller to javafx.fxml;

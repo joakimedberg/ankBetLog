@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -42,6 +43,8 @@ public class PrimaryController extends Controller {
     TableColumn<DataForTable, Number> stake_Column;
     @FXML
     TableColumn<DataForTable, Number> net_Column;
+    @FXML
+    Button addbet_Button;
 
     private View view;
     private int count;
@@ -62,6 +65,11 @@ public class PrimaryController extends Controller {
     @FXML
     private void logout() {
         view.loadLobbyView();
+    }
+
+    @FXML
+    private void addbet() {
+        view.loadAddBetView(addbet_Button);
     }
 
     @Override

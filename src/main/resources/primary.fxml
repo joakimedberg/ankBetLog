@@ -32,7 +32,7 @@
                 <NumberAxis side="LEFT" />
             </yAxis>
         </LineChart>
-        <Button layoutX="362.0" layoutY="72.0" mnemonicParsing="false" text="ADD BET" />
+        <Button fx:id="addbet_Button" layoutX="362.0" layoutY="72.0" mnemonicParsing="false" onAction="#addbet" text="ADD BET" />
         <ImageView layoutY="34.0">
             <image>
                 <Image url="@duck.png" />
