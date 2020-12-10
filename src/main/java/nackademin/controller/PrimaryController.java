@@ -16,6 +16,8 @@ import nackademin.model.Game;
 import nackademin.view.View;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class PrimaryController extends Controller {
@@ -47,6 +49,8 @@ public class PrimaryController extends Controller {
     private View view;
     private int count;
     private ObservableList<DataForTable> bets;
+    private String outcome;
+    private Bet bet;
 
     public void updateTable(){
         bets.add(new DataForTable(super.getDatabase().getLatestBet(),super.getDatabase().getLatestBet().getGame()));
@@ -65,11 +69,6 @@ public class PrimaryController extends Controller {
         initTable();
         populateTable();
 
-        addBet_Button.focusedProperty().addListener((ov, oldV, newV) -> {
-            if (!newV) { // focus lost
-                System.out.println("hej");
-            }
-        });
     }
 
     @FXML
@@ -78,7 +77,7 @@ public class PrimaryController extends Controller {
     }
 
     @FXML
-    private void addbet() {
+    private void addBet() {
         view.loadAddBetView(addBet_Button);
     }
 
@@ -192,28 +191,31 @@ public class PrimaryController extends Controller {
             };
             return cell;
         });
+
+
         edit_Column.setCellFactory(cellData -> {
+
+            ArrayList<MenuItem> list = new ArrayList<>();
+            Collections.addAll(list, new MenuItem("WIN"), new MenuItem("1/2WIN"), new MenuItem("LOSS"), new MenuItem("1/2LOSS"), new MenuItem("PUSH"));
             MenuButton menuButton = new MenuButton();
-            Menu menu1 = new Menu("GRADE");
-            MenuItem menuItem1 = new MenuItem("W");
-            MenuItem menuItem2 = new MenuItem("1/2W");
-            MenuItem menuItem3 = new MenuItem("L");
-            MenuItem menuItem4 = new MenuItem("1/2L");
-            MenuItem menuItem5 = new MenuItem("P");
-
-            menuButton.getItems().add(menu1);
-            menu1.getItems().addAll(menuItem1,menuItem2, menuItem3, menuItem4,menuItem5);
-
+            Menu menu = new Menu("GRADE");
+            menuButton.getItems().add(menu);
+            menu.getItems().addAll(list);
 
             TableCell<DataForTable, String> cell = new TableCell<>() {
                 @Override
                 public void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
+                    for (MenuItem i : list) {
+                        i.setOnAction(event -> {
+                            getTableView().getItems().get(getIndex()).getBet().setOutcome(i.getText());
+                            getDatabase().updateNetAndOutcome( getTableView().getItems().get(getIndex()).getBet());
+                            bets_Table.refresh();
+                        });
+                    }
                     if (empty) {
                         setGraphic(null);
                     } else {
-                        DataForTable data = getTableView().getItems().get(getIndex());
-
                         setGraphic(menuButton);
                     }
                 }

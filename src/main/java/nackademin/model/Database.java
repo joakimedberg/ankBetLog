@@ -161,6 +161,26 @@ public class Database {
         insertBet();
     }
 
+    public void updateNetAndOutcome(Bet bet) {
+            insertNetAndOutcome(bet);
+
+
+    }
+
+    private void insertNetAndOutcome(Bet bet) {
+        String sql = "UPDATE bets SET net = '" + bet.getNet() + "' WHERE id=" + bet.getId();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        ;
+    }
+
+
+
     public void closeConnection() {
         try {
             connection.close();

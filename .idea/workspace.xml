@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb20540c-dc38-484d-a04b-5e1114306b38" name="Default Changelist" comment="Table is now refreshing when adding a new bet." />
+    <list default="true" id="cb20540c-dc38-484d-a04b-5e1114306b38" name="Default Changelist" comment="Table is now refreshing when adding a new bet.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/controller/PrimaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/controller/PrimaryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/model/Bet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/Bet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/model/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/primary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/primary.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,6 +28,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1lOMfchQ4B9POF5ZweVFZqMhSef" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />

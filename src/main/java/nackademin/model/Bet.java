@@ -40,7 +40,20 @@ public class Bet {
     }
 
     private void calculateNet() {
-        net = String.valueOf(odds * stake);
+        System.out.println(outcome);
+        if (outcome.equals("PUSH")) {
+            net = String.valueOf(0);
+        } else if (outcome.equals("WIN")) {
+            net = String.valueOf(odds * stake);
+        } else if (outcome.equals("1/2WIN")) {
+            net = String.valueOf((odds * stake) / 2);
+        } else if (outcome.equals("LOSS")) {
+            net = String.valueOf(-stake);
+        } else if (outcome.equals("1/2LOSS")) {
+            net = String.valueOf(- (stake/2));
+        }
+
+
     }
 
     public int getId() {
