@@ -18,6 +18,7 @@ public class LobbyController extends Controller {
 
     private View view;
 
+
     @FXML
     private void login() {
         if (super.getDatabase().getUser().getUsername().equals(username_Field.getText()) &&
@@ -35,4 +36,6 @@ public class LobbyController extends Controller {
     public void setView(View view) {
         this.view = view;
     }
+
+
 }

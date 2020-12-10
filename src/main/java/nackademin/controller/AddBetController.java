@@ -30,7 +30,12 @@ public class AddBetController extends Controller {
 
     private View view;
     private ArrayList<TextField> fields;
-    private String category, period, date, bet;
+    private String category, period, bet;
+    PrimaryController primaryController;
+
+    public void setPrimaryController(PrimaryController primaryController){
+        this.primaryController = primaryController;
+    }
 
     @FXML
     public void initialize() {
@@ -71,8 +76,6 @@ public class AddBetController extends Controller {
             team2_Label.setText(newValue);
         });
 
-
-
     }
 
 
@@ -87,10 +90,10 @@ public class AddBetController extends Controller {
             return;
         }
 
-        super.getDatabase().addBet(date, sport_Label.getText(), league_Label.getText(), team1_Label.getText(),
-                team2_Label.getText(), period, category, bet, line_Field.getText(), Double.valueOf(odds_Field.getText()),
+        super.getDatabase().addBet(date_Label.getText(), sport_Label.getText(), league_Label.getText(), team1_Label.getText(),
+                team2_Label.getText(), period_Label.getText(), category, bet, line_Field.getText(), Double.valueOf(odds_Field.getText()),
                 Double.valueOf(stake_Field.getText()));
-
+        primaryController.updateTable();
         view.closeAddBetView();
 
     }

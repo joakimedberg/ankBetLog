@@ -19,3 +19,4 @@ https://stackoverflow.com/questions/23571747/tableview-with-different-objects-ja
 https://stackoverflow.com/questions/23044935/java-lang-illegalargumentexception-children-duplicate-children-added-parent
 https://stackoverflow.com/questions/24889638/javafx-properties-in-tableview
 https://stackoverflow.com/questions/30160899/value-change-listener-for-javafxs-textfield
+https://stackoverflow.com/questions/26526811/fxml-public-static-vars-in-javafx

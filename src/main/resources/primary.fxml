@@ -22,6 +22,7 @@
                 <TableColumn fx:id="odds_Column" prefWidth="53.0" text="ODDS" />
                 <TableColumn fx:id="stake_Column" prefWidth="63.0" text="STAKE" />
                 <TableColumn fx:id="net_Column" prefWidth="56.0" text="NET" />
+            <TableColumn fx:id="edit_Column" prefWidth="75.0" text="EDIT" />
             </columns>
         </TableView>
         <LineChart layoutY="435.0" prefHeight="165.0" prefWidth="800.0">
@@ -32,7 +33,7 @@
                 <NumberAxis side="LEFT" />
             </yAxis>
         </LineChart>
-        <Button fx:id="addbet_Button" layoutX="78.0" layoutY="1.0" mnemonicParsing="false" onAction="#addbet" text="ADD BET" />
+        <Button fx:id="addBet_Button" layoutX="78.0" layoutY="1.0" mnemonicParsing="false" onAction="#addbet" text="ADD BET" />
         <ImageView layoutX="7.0" layoutY="34.0">
             <image>
                 <Image url="@duck.png" />

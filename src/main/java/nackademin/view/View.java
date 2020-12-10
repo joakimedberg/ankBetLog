@@ -19,6 +19,7 @@ public class View {
     private Stage stage;
     private Parent parent;
     private PopOver pop;
+    private PrimaryController primaryController;
 
     public View(Stage stage)  {
         this.stage = stage;
@@ -32,8 +33,8 @@ public class View {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/primary.fxml"));
             parent = loader.load();
-            PrimaryController controller = loader.getController();
-            controller.setView(this);
+            primaryController = loader.getController();
+            primaryController.setView(this);
             stage.setScene(new Scene(parent));
             stage.show();
         } catch (IOException e) {
@@ -47,8 +48,8 @@ public class View {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/lobby.fxml"));
             parent = loader.load();
-            LobbyController controller = loader.getController();
-            controller.setView(this);
+            LobbyController lobbyController = loader.getController();
+            lobbyController.setView(this);
             stage.setScene(new Scene(parent));
             stage.show();
         } catch (IOException e) {
@@ -60,8 +61,9 @@ public class View {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/addbet.fxml"));
             Parent parent = loader.load();
-            AddBetController controller = loader.getController();
-            controller.setView(this);
+            AddBetController addBetController = loader.getController();
+            addBetController.setView(this);
+            addBetController.setPrimaryController(primaryController);
 
             pop = new PopOver(new Pane(parent));
             pop.show(button);

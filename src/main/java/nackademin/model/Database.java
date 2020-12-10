@@ -18,7 +18,7 @@ public class Database {
 
     }
 
-    public static Database getDatabase() {
+    public static Database getInstance() {
         if (database == null) {
             database = new Database();
         }
@@ -116,6 +116,10 @@ public class Database {
         return Collections.unmodifiableList(bets);
     }
 
+    public Bet getLatestBet(){
+        return bets.getLast();
+    }
+
     private void insertBet() {
         String sql = "INSERT INTO bets('id','date','sport',"
                 + "'league', 'team1','team2','period','category'," +
@@ -164,10 +168,6 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        new Database();
     }
 }
 

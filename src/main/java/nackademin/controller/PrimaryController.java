@@ -16,17 +16,12 @@ import nackademin.model.Game;
 import nackademin.view.View;
 
 import java.text.SimpleDateFormat;
+import java.util.LinkedList;
 
 public class PrimaryController extends Controller {
 
     @FXML
-    Label name_Label;
-    @FXML
-    Label roi_Label;
-    @FXML
-    Label net_Label;
-    @FXML
-    Label stats_Label;
+    private Label name_Label, roi_Label, net_Label, stats_Label;
     @FXML
     TableView<DataForTable> bets_Table;
     @FXML
@@ -44,13 +39,22 @@ public class PrimaryController extends Controller {
     @FXML
     TableColumn<DataForTable, Number> net_Column;
     @FXML
-    Button addbet_Button;
+    TableColumn<DataForTable, String> edit_Column;
+    @FXML
+    Button addBet_Button;
+
 
     private View view;
     private int count;
+    private ObservableList<DataForTable> bets;
 
+    public void updateTable(){
+        bets.add(new DataForTable(super.getDatabase().getLatestBet(),super.getDatabase().getLatestBet().getGame()));
+        bets_Table.refresh();
+    }
     @FXML
     public void initialize() {
+
         name_Label.setText(super.getDatabase().getUser().getUsername());
 
         double roi = Math.round(super.getDatabase().getStatistics().getRoi() * 100 * 100) / 100;
@@ -60,6 +64,12 @@ public class PrimaryController extends Controller {
                 + super.getDatabase().getStatistics().getLose() + "/" + super.getDatabase().getStatistics().getPush());
         initTable();
         populateTable();
+
+        addBet_Button.focusedProperty().addListener((ov, oldV, newV) -> {
+            if (!newV) { // focus lost
+                System.out.println("hej");
+            }
+        });
     }
 
     @FXML
@@ -69,8 +79,9 @@ public class PrimaryController extends Controller {
 
     @FXML
     private void addbet() {
-        view.loadAddBetView(addbet_Button);
+        view.loadAddBetView(addBet_Button);
     }
+
 
     @Override
     public void setView(View view) {
@@ -181,15 +192,42 @@ public class PrimaryController extends Controller {
             };
             return cell;
         });
+        edit_Column.setCellFactory(cellData -> {
+            MenuButton menuButton = new MenuButton();
+            Menu menu1 = new Menu("GRADE");
+            MenuItem menuItem1 = new MenuItem("W");
+            MenuItem menuItem2 = new MenuItem("1/2W");
+            MenuItem menuItem3 = new MenuItem("L");
+            MenuItem menuItem4 = new MenuItem("1/2L");
+            MenuItem menuItem5 = new MenuItem("P");
 
+            menuButton.getItems().add(menu1);
+            menu1.getItems().addAll(menuItem1,menuItem2, menuItem3, menuItem4,menuItem5);
+
+
+            TableCell<DataForTable, String> cell = new TableCell<>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        DataForTable data = getTableView().getItems().get(getIndex());
+
+                        setGraphic(menuButton);
+                    }
+                }
+            };
+            return cell;
+        });
     }
 
     private void populateTable() {
-        ObservableList<DataForTable> list = FXCollections.observableArrayList();
+        bets = FXCollections.observableArrayList();
         for (Bet b : super.getDatabase().getBets()) {
-            list.add(new DataForTable(b, b.getGame()));
+            bets.add(new DataForTable(b, b.getGame()));
         }
-        bets_Table.setItems(list);
+        bets_Table.setItems(bets);
 
     }
     private static class DataForTable {
