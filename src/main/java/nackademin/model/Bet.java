@@ -1,14 +1,20 @@
 package nackademin.model;
 
+import nackademin.model.database.Database;
+import nackademin.observer.Observer;
+import nackademin.observer.Subject;
+
+import java.util.ArrayList;
 import java.util.Date;
-public class Bet {
+public class Bet implements Subject {
 
     private int id;
     private String outcome, bet, period, category, line, net;
     private Double odds, stake;
     private Game game;
+    private ArrayList<Observer> observers;
 
-    protected Bet(int id, String date, String sport, String league, String team1, String team2, String period, String category, String bet,String line, Double odds, Double stake, String net,String outcome) {
+    public Bet(int id, String date, String sport, String league, String team1, String team2, String period, String category, String bet, String line, Double odds, Double stake, String net, String outcome) {
 
         game = new Game(date, sport, league, team1, team2);
 
@@ -21,6 +27,9 @@ public class Bet {
         this.line = line;
         this.net = net;
         this.outcome = outcome;
+
+        observers = new ArrayList<>();
+
     }
 
     public String getLine() {
@@ -79,9 +88,24 @@ public class Bet {
     public void setOutcome(String outcome) {
         this.outcome = outcome;
         calculateNet();
+        notifyUpdate();
     }
 
     public String getBet() {
         return bet;
+    }
+
+    @Override
+    public void attach(Observer o) {
+        observers.add(o);
+
+        System.out.println("Observer added to Bet.");
+    }
+
+    @Override
+    public void notifyUpdate() {
+        for (Observer o : observers) {
+            o.update(this);
+        }
     }
 }

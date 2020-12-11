@@ -20,3 +20,6 @@ https://stackoverflow.com/questions/23044935/java-lang-illegalargumentexception-
 https://stackoverflow.com/questions/24889638/javafx-properties-in-tableview
 https://stackoverflow.com/questions/30160899/value-change-listener-for-javafxs-textfield
 https://stackoverflow.com/questions/26526811/fxml-public-static-vars-in-javafx
+
+Stream
+https://www.baeldung.com/java-stream-findfirst-vs-findany

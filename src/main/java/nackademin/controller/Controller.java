@@ -1,20 +1,10 @@
 package nackademin.controller;
 
-import nackademin.model.Database;
 import nackademin.view.View;
+
 
 public abstract class Controller {
 
-    private Database db;
-
-    public Controller() {
-        db = Database.getInstance();
-    }
-
-    public Database getDatabase() {
-        return db;
-    }
-
-    public abstract void setView(View view);
+    protected abstract void setView(View view);
 
 }

@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import nackademin.model.Bet;
 import nackademin.model.Game;
+import nackademin.model.database.Database;
 import nackademin.view.View;
 
 import java.text.SimpleDateFormat;
@@ -52,21 +53,27 @@ public class PrimaryController extends Controller {
     private String outcome;
     private Bet bet;
 
+
     public void updateTable(){
-        bets.add(new DataForTable(super.getDatabase().getLatestBet(),super.getDatabase().getLatestBet().getGame()));
+
+        bets.add(new DataForTable(Database.getBetDatabase().getBets().getLast(), Database.getBetDatabase().getBets().getLast().getGame()));
         bets_Table.refresh();
     }
+
+
     @FXML
     public void initialize() {
 
-        name_Label.setText(super.getDatabase().getUser().getUsername());
-
+        name_Label.setText(Database.getUserDatabase().getUser().getUsername());
+/*
         double roi = Math.round(super.getDatabase().getStatistics().getRoi() * 100 * 100) / 100;
         roi_Label.setText("ROI:" + roi + "%");
         net_Label.setText("NET:" + super.getDatabase().getStatistics().getNet());
         stats_Label.setText("WLP:" + super.getDatabase().getStatistics().getWon() + "/"
                 + super.getDatabase().getStatistics().getLose() + "/" + super.getDatabase().getStatistics().getPush());
+    */
         initTable();
+
         populateTable();
 
     }
@@ -209,7 +216,7 @@ public class PrimaryController extends Controller {
                     for (MenuItem i : list) {
                         i.setOnAction(event -> {
                             getTableView().getItems().get(getIndex()).getBet().setOutcome(i.getText());
-                            getDatabase().updateNetAndOutcome( getTableView().getItems().get(getIndex()).getBet());
+                            //getDatabase().updateNetAndOutcome( getTableView().getItems().get(getIndex()).getBet());
                             bets_Table.refresh();
                         });
                     }
@@ -226,7 +233,7 @@ public class PrimaryController extends Controller {
 
     private void populateTable() {
         bets = FXCollections.observableArrayList();
-        for (Bet b : super.getDatabase().getBets()) {
+        for (Bet b : Database.getBetDatabase().getBets()) {
             bets.add(new DataForTable(b, b.getGame()));
         }
         bets_Table.setItems(bets);

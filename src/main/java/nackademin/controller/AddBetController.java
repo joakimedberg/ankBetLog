@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import nackademin.model.Bet;
+import nackademin.model.database.Database;
 import nackademin.view.View;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -90,11 +91,15 @@ public class AddBetController extends Controller {
             return;
         }
 
-        super.getDatabase().addBet(date_Label.getText(), sport_Label.getText(), league_Label.getText(), team1_Label.getText(),
+        Bet b = new Bet(Database.getBetDatabase().getBets().getLast().getId() + 1,date_Label.getText(), sport_Label.getText(), league_Label.getText(), team1_Label.getText(),
                 team2_Label.getText(), period_Label.getText(), category, bet, line_Field.getText(), Double.valueOf(odds_Field.getText()),
-                Double.valueOf(stake_Field.getText()));
+                Double.valueOf(stake_Field.getText()), "TBD", "TBD");
+        b.attach(Database.getBetDatabase());
+        b.notifyUpdate();
         primaryController.updateTable();
         view.closeAddBetView();
+
+
 
     }
 

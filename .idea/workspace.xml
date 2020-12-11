@@ -4,12 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb20540c-dc38-484d-a04b-5e1114306b38" name="Default Changelist" comment="Table is now refreshing when adding a new bet.">
+    <list default="true" id="cb20540c-dc38-484d-a04b-5e1114306b38" name="Default Changelist" comment="Fixed net and outcome.">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/database/BetDatabase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/database/SQLiteConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/database/StatisticsDatabase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/database/UserDatabase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/nackademin/observer/Observer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/nackademin/observer/Subject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projectInformation/useful_links.txt" beforeDir="false" afterPath="$PROJECT_DIR$/projectInformation/useful_links.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/controller/AddBetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/controller/AddBetController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/controller/LobbyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/controller/LobbyController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/controller/PrimaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/controller/PrimaryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/model/Bet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/Bet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/model/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/primary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/primary.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/model/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/database/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,12 +30,17 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev/table" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1lOMfchQ4B9POF5ZweVFZqMhSef" />
@@ -77,7 +93,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607567265898</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fixed net and outcome.">
+      <created>1607628532887</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1607628532887</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -95,6 +118,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added some more code for GUI." />
     <MESSAGE value="Table is now refreshing when adding a new bet." />
-    <option name="LAST_COMMIT_MESSAGE" value="Table is now refreshing when adding a new bet." />
+    <MESSAGE value="Fixed net and outcome." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed net and outcome." />
   </component>
 </project>
