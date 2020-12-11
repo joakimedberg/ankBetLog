@@ -56,7 +56,7 @@ public class PrimaryController extends Controller {
 
     public void updateTable(){
 
-        bets.add(new DataForTable(Database.getBetDatabase().getBets().getLast(), Database.getBetDatabase().getBets().getLast().getGame()));
+        bets.add(0,new DataForTable(Database.getBetDatabase().getBets().getLast(), Database.getBetDatabase().getBets().getLast().getGame()));
         bets_Table.refresh();
     }
 

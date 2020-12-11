@@ -61,13 +61,13 @@ public class BetDatabase extends Database implements Observer {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM bets ORDER BY id DESC");
 
             while (resultSet.next()) {
-               // int id = resultSet.getInt("id");
-                /*if ( bets.isEmpty() || bets.stream().noneMatch(bet -> {
+                int id = resultSet.getInt("id");
+                if (bets.isEmpty() || bets.stream().noneMatch(bet -> {
                     if (bet.getId() == id)
                         return true;
 
                     return false;
-                }) ) {*/
+                })) {
                     bets.add(new Bet(resultSet.getInt("id"),
                             resultSet.getString("date"),
                             resultSet.getString("sport"),
@@ -85,7 +85,11 @@ public class BetDatabase extends Database implements Observer {
                     System.out.println("hej " + bets.getLast().getId());
                     bets.getLast().attach(this);
                 }
+            }
 
+            for (Bet b : bets) {
+                System.out.println(b.getId());
+            }
 
             System.out.println("Bets fetched from database.");
             SQLiteConnection.getInstance().close();
@@ -95,6 +99,7 @@ public class BetDatabase extends Database implements Observer {
     }
 
     public LinkedList<Bet> getBets() {
+        fetchData();
         return bets;
     }
 

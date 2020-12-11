@@ -15,6 +15,7 @@ public class Bet implements Subject {
     private ArrayList<Observer> observers;
 
     public Bet(int id, String date, String sport, String league, String team1, String team2, String period, String category, String bet, String line, Double odds, Double stake, String net, String outcome) {
+        System.out.println("New bet created. " + id);
 
         game = new Game(date, sport, league, team1, team2);
 
