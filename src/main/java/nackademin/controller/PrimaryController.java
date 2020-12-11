@@ -65,13 +65,13 @@ public class PrimaryController extends Controller {
     public void initialize() {
 
         name_Label.setText(Database.getUserDatabase().getUser().getUsername());
-/*
-        double roi = Math.round(super.getDatabase().getStatistics().getRoi() * 100 * 100) / 100;
+
+        double roi = Math.round(Database.getStatisticsDatabase().getStatistics().getRoi() * 100 * 100) / 100;
         roi_Label.setText("ROI:" + roi + "%");
-        net_Label.setText("NET:" + super.getDatabase().getStatistics().getNet());
-        stats_Label.setText("WLP:" + super.getDatabase().getStatistics().getWon() + "/"
-                + super.getDatabase().getStatistics().getLose() + "/" + super.getDatabase().getStatistics().getPush());
-    */
+        net_Label.setText("NET:" + Database.getStatisticsDatabase().getStatistics().getNet());
+        stats_Label.setText("WLP:" + Database.getStatisticsDatabase().getStatistics().getWon() + "/"
+                + Database.getStatisticsDatabase().getStatistics().getLose() + "/" + Database.getStatisticsDatabase().getStatistics().getPush());
+
         initTable();
 
         populateTable();

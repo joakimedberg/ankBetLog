@@ -5,16 +5,53 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb20540c-dc38-484d-a04b-5e1114306b38" name="Default Changelist" comment="Some test code.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/controller/AddBetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/controller/AddBetController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/controller/PrimaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/controller/PrimaryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/model/Bet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/Bet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/model/database/BetDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/database/BetDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/model/Statistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/Statistics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/model/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/database/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/model/database/StatisticsDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/database/StatisticsDatabase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DebuggerManager">
+    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true" converted="true">
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </breakpoint_any>
+    <ui_properties converted="true" />
+    <breakpoint_rules converted="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -96,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607697593769</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Testing generics...">
+      <created>1607702633889</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1607702633889</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -104,7 +148,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -116,6 +172,7 @@
     <MESSAGE value="Table is now refreshing when adding a new bet." />
     <MESSAGE value="Fixed net and outcome." />
     <MESSAGE value="Some test code." />
-    <option name="LAST_COMMIT_MESSAGE" value="Some test code." />
+    <MESSAGE value="Testing generics..." />
+    <option name="LAST_COMMIT_MESSAGE" value="Testing generics..." />
   </component>
 </project>

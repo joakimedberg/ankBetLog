@@ -2,24 +2,33 @@ package nackademin.model;
 
 public class Statistics {
 
-    private double roi, net;
+    private double roi, net, turn;
     private int won, lose, push;
 
 
-    protected Statistics(double roi, double net, int won, int lose, int push) {
+    public Statistics(double net, double turn, double roi, int won, int lose, int push) {
         this.roi = roi;
         this.net = net;
         this.won = won;
         this.lose = lose;
         this.push = push;
+        this.turn = turn;
+    }
+
+    public double getTurn() {
+        return turn;
+    }
+
+    public void setTurn(double turn) {
+        this.turn = turn;
     }
 
     public double getRoi() {
         return roi;
     }
 
-    public void setRoi(double roi) {
-        this.roi = roi;
+    public void setRoi() {
+       calculateRoi();
     }
 
     public double getNet() {
@@ -52,5 +61,9 @@ public class Statistics {
 
     public void setPush(int push) {
         this.push = push;
+    }
+
+    private void calculateRoi() {
+        roi = (net / turn) - 1;
     }
 }
