@@ -23,3 +23,6 @@ https://stackoverflow.com/questions/26526811/fxml-public-static-vars-in-javafx
 
 Stream
 https://www.baeldung.com/java-stream-findfirst-vs-findany
+
+Cloning
+https://www.javadevjournal.com/java/java-deep-copy/

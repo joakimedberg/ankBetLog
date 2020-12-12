@@ -91,10 +91,18 @@ public class AddBetController extends Controller {
             return;
         }
 
-        Bet b = new Bet(Database.getBetDatabase().getBets().getFirst().getId() + 1,date_Label.getText(), sport_Label.getText(), league_Label.getText(), team1_Label.getText(),
+        int id;
+        if (Database.getBetDatabase().getBets().isEmpty()) {
+            id = 1;
+        } else {
+            id = Database.getBetDatabase().getBets().getFirst().getId() + 1;
+        }
+
+        Bet b = new Bet(id,date_Label.getText(), sport_Label.getText(), league_Label.getText(), team1_Label.getText(),
                 team2_Label.getText(), period_Label.getText(), category, bet, line_Field.getText(), Double.valueOf(odds_Field.getText()),
-                Double.valueOf(stake_Field.getText()), "TBD", "TBD");
+                Double.valueOf(stake_Field.getText()), "TBD", "TBD", true);
         b.attach(Database.getBetDatabase());
+        b.attach(Database.getStatisticsDatabase());
         b.notifyUpdate();
         primaryController.updateTable();
         view.closeAddBetView();

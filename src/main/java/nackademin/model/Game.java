@@ -1,20 +1,26 @@
 package nackademin.model;
 
-import java.util.Date;
-
 public class Game {
 
-    private int id;
     private String date;
+    private boolean tbd;
     private String sport, league, team1, team2;
 
-    protected Game(String date, String sport, String league, String team1, String team2) {
-        this.id = id;
+    protected Game(String date, String sport, String league, String team1, String team2, boolean tbd) {
         this.date = date;
         this.sport = sport;
         this.league = league;
         this.team1 = team1;
         this.team2 = team2;
+        this.tbd = tbd;
+    }
+
+    public boolean isTbd() {
+        return tbd;
+    }
+
+    public void setTbd(boolean tbd) {
+        this.tbd = tbd;
     }
 
     public String getDate() {

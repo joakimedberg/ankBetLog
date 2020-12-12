@@ -2,20 +2,20 @@ package nackademin.model.database;
 
 import nackademin.model.Bet;
 import nackademin.model.Statistics;
+import nackademin.observer.Observer;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class StatisticsDatabase extends Database {
+public class StatisticsDatabase extends Database implements Observer {
     private static StatisticsDatabase statisticsDatabase;
     private Statistics statistics;
     private Bet bet;
 
     private StatisticsDatabase() {
         System.out.println("New Statistics Database connection established.");
-        fetchData();
     }
 
     protected static StatisticsDatabase getInstance() {
@@ -26,8 +26,8 @@ public class StatisticsDatabase extends Database {
     }
     @Override
     protected void sendData() {
-        String sql = "REPLACE INTO statistics('net','turn','roi',"
-                + "'won', 'lose','push') VALUES(?,?,?,?,?,?)";
+        String sql = "UPDATE statistics SET net = ? , turn = ? , roi = ?, won = ?, lose = ?, push = ?";
+
         try {
             PreparedStatement statement = SQLiteConnection.getInstance().connect().prepareStatement(sql);
 
@@ -80,5 +80,22 @@ public class StatisticsDatabase extends Database {
     }
 
     public Statistics getStatistics() {
+        fetchData();
         return statistics;
-    }}
+    }
+
+    @Override
+    public void update(Object o) {
+        bet = (Bet) o;
+        if (!bet.getOutcome().equals("TBD"))
+            if (bet.getOutcome().equals("void") && !bet.getGame().isTbd()){
+                try {
+                    bet = (Bet) bet.clone();
+                    bet.setOutcome("void");
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
+                }
+            }
+                sendData();
+    }
+}

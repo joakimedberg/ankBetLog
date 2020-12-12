@@ -1,12 +1,10 @@
 package nackademin.model;
 
-import nackademin.model.database.Database;
 import nackademin.observer.Observer;
 import nackademin.observer.Subject;
-
 import java.util.ArrayList;
-import java.util.Date;
-public class Bet implements Subject {
+
+public class Bet implements Subject, Cloneable {
 
     private int id;
     private String outcome, bet, period, category, line, net;
@@ -14,10 +12,8 @@ public class Bet implements Subject {
     private Game game;
     private ArrayList<Observer> observers;
 
-    public Bet(int id, String date, String sport, String league, String team1, String team2, String period, String category, String bet, String line, Double odds, Double stake, String net, String outcome) {
-        System.out.println("New bet created. " + id);
-
-        game = new Game(date, sport, league, team1, team2);
+    public Bet(int id, String date, String sport, String league, String team1, String team2, String period, String category, String bet, String line, Double odds, Double stake, String net, String outcome, boolean tbd) {
+        game = new Game(date, sport, league, team1, team2, tbd);
 
         this.id = id;
         this.odds = odds;
@@ -50,13 +46,12 @@ public class Bet implements Subject {
     }
 
     private void calculateNet() {
-        System.out.println(outcome);
         if (outcome.equals("PUSH")) {
             net = String.valueOf(0);
         } else if (outcome.equals("WIN")) {
-            net = String.valueOf(odds * stake);
+            net = String.valueOf((odds * stake) - stake);
         } else if (outcome.equals("1/2WIN")) {
-            net = String.valueOf((odds * stake) / 2);
+            net = String.valueOf(((odds * stake) / 2) - stake);
         } else if (outcome.equals("LOSS")) {
             net = String.valueOf(-stake);
         } else if (outcome.equals("1/2LOSS")) {
@@ -87,8 +82,15 @@ public class Bet implements Subject {
     }
 
     public void setOutcome(String outcome) {
-        this.outcome = outcome;
-        calculateNet();
+        if (!outcome.equals("void")){
+            this.outcome = outcome;
+            game.setTbd(false);
+            calculateNet();
+        } else if (outcome.equals("void") & game.isTbd()) {
+
+        }
+
+
         notifyUpdate();
     }
 
@@ -108,5 +110,11 @@ public class Bet implements Subject {
         for (Observer o : observers) {
             o.update(this);
         }
+    }
+    @Override
+    public Object clone()
+            throws CloneNotSupportedException
+    {
+        return super.clone();
     }
 }

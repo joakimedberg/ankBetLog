@@ -4,11 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb20540c-dc38-484d-a04b-5e1114306b38" name="Default Changelist" comment="Some test code.">
+    <list default="true" id="cb20540c-dc38-484d-a04b-5e1114306b38" name="Default Changelist" comment="Added some code for statistics.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projectInformation/useful_links.txt" beforeDir="false" afterPath="$PROJECT_DIR$/projectInformation/useful_links.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/controller/AddBetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/controller/AddBetController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/controller/PrimaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/controller/PrimaryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/model/Bet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/Bet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/model/Statistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/Statistics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/model/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/database/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/model/database/BetDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/database/BetDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/model/database/SQLiteConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/database/SQLiteConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/model/database/StatisticsDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/model/database/StatisticsDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nackademin/observer/Observer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nackademin/observer/Observer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/primary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/primary.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +72,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev/table" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -140,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607702633889</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added some code for statistics.">
+      <created>1607703088353</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1607703088354</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -154,7 +169,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="dev/stats" />
                       </list>
                     </value>
                   </entry>
@@ -173,6 +188,7 @@
     <MESSAGE value="Fixed net and outcome." />
     <MESSAGE value="Some test code." />
     <MESSAGE value="Testing generics..." />
-    <option name="LAST_COMMIT_MESSAGE" value="Testing generics..." />
+    <MESSAGE value="Added some code for statistics." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added some code for statistics." />
   </component>
 </project>

@@ -20,7 +20,6 @@ public class SQLiteConnection {
     protected Connection connect()  {
         try {
             String url = String.valueOf(getClass().getResource("/database.db"));
-            System.out.println(getClass().getResource("/database.db"));
             connection = DriverManager.getConnection("jdbc:sqlite:"+url);
         } catch (SQLException e) {
             e.printStackTrace();

@@ -4,5 +4,5 @@ import nackademin.model.Bet;
 
 public interface Observer
 {
-    void update(Bet bet);
+    void update(Object o);
 }

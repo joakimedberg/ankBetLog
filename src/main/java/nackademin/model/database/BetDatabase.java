@@ -14,7 +14,6 @@ public class BetDatabase extends Database implements Observer {
     private BetDatabase() {
         System.out.println("New Bet Database connection established.");
         bets = new LinkedList<>();
-        fetchData();
     }
 
     protected static BetDatabase getInstance() {
@@ -81,9 +80,14 @@ public class BetDatabase extends Database implements Observer {
                             resultSet.getDouble("odds"),
                             resultSet.getDouble("stake"),
                             resultSet.getString("net"),
-                            resultSet.getString("outcome")));
+                            resultSet.getString("outcome"),
+                            resultSet.getBoolean("tbd")
+                            )
+                    );
+
                     System.out.println("hej " + bets.getLast().getId());
                     bets.getLast().attach(this);
+                    bets.getLast().attach(getStatisticsDatabase());
                 }
             }
 
@@ -103,10 +107,9 @@ public class BetDatabase extends Database implements Observer {
         return bets;
     }
 
-
     @Override
-    public void update(Bet bet) {
-        this.bet = bet;
+    public void update(Object o) {
+        bet = (Bet) o;
         sendData();
     }
 }

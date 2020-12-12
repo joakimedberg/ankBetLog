@@ -3,6 +3,8 @@ package nackademin.controller;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,6 +15,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import nackademin.model.Bet;
 import nackademin.model.Game;
+import nackademin.model.Statistics;
 import nackademin.model.database.Database;
 import nackademin.view.View;
 
@@ -52,6 +55,7 @@ public class PrimaryController extends Controller {
     private ObservableList<DataForTable> bets;
     private String outcome;
     private Bet bet;
+    private Statistics statistics;
 
 
     public void updateTable(){
@@ -66,11 +70,7 @@ public class PrimaryController extends Controller {
 
         name_Label.setText(Database.getUserDatabase().getUser().getUsername());
 
-        double roi = Math.round(Database.getStatisticsDatabase().getStatistics().getRoi() * 100 * 100) / 100;
-        roi_Label.setText("ROI:" + roi + "%");
-        net_Label.setText("NET:" + Database.getStatisticsDatabase().getStatistics().getNet());
-        stats_Label.setText("WLP:" + Database.getStatisticsDatabase().getStatistics().getWon() + "/"
-                + Database.getStatisticsDatabase().getStatistics().getLose() + "/" + Database.getStatisticsDatabase().getStatistics().getPush());
+        updateStatistics();
 
         initTable();
 
@@ -119,7 +119,7 @@ public class PrimaryController extends Controller {
 
                 } else if (!cell.isEmpty() && count == 1) {
                     competition_Column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGame().getLeague()));
-                    count = 1;
+                    count = 0;
 
                 }
                 bets_Table.refresh();
@@ -150,7 +150,7 @@ public class PrimaryController extends Controller {
                         team1.setText(data.getGame().getTeam1());
                         team2.setText(data.getGame().getTeam2());
                         period.setText(data.getBet().getPeriod());
-                        /*
+
                         if (data.getBet().getCategory().equals("hcp")) {
                             if (data.getBet().getBet().equals("1")) {
                                 team1.setStyle("-fx-font-weight : bold;");
@@ -162,7 +162,7 @@ public class PrimaryController extends Controller {
                                 team1.setText(data.getGame().getTeam2());
                             }
                         }
-                        */
+
                         setPrefHeight(flow.prefHeight(game_Column.getWidth()) + 4);
                         setGraphic(flow);
                     }
@@ -203,7 +203,8 @@ public class PrimaryController extends Controller {
         edit_Column.setCellFactory(cellData -> {
 
             ArrayList<MenuItem> list = new ArrayList<>();
-            Collections.addAll(list, new MenuItem("WIN"), new MenuItem("1/2WIN"), new MenuItem("LOSS"), new MenuItem("1/2LOSS"), new MenuItem("PUSH"));
+            Collections.addAll(list, new MenuItem("WIN"), new MenuItem("1/2WIN"), new MenuItem("LOSS"),
+                    new MenuItem("1/2LOSS"), new MenuItem("PUSH"), new MenuItem("void"));
             MenuButton menuButton = new MenuButton();
             Menu menu = new Menu("GRADE");
             menuButton.getItems().add(menu);
@@ -216,8 +217,8 @@ public class PrimaryController extends Controller {
                     for (MenuItem i : list) {
                         i.setOnAction(event -> {
                             getTableView().getItems().get(getIndex()).getBet().setOutcome(i.getText());
-                            //getDatabase().updateNetAndOutcome( getTableView().getItems().get(getIndex()).getBet());
                             bets_Table.refresh();
+                            updateStatistics();
                         });
                     }
                     if (empty) {
@@ -229,6 +230,20 @@ public class PrimaryController extends Controller {
             };
             return cell;
         });
+
+        bets_Table.widthProperty()
+                .addListener((ov, t, t1) -> {
+                    // Get the table header
+                    Pane header = (Pane) bets_Table
+                            .lookup("TableHeaderRow");
+                    if (header != null && header.isVisible()) {
+                        header.setMaxHeight(0);
+                        header.setMinHeight(0);
+                        header.setPrefHeight(0);
+                        header.setVisible(false);
+                        header.setManaged(false);
+                    }
+                });
     }
 
     private void populateTable() {
@@ -255,5 +270,15 @@ public class PrimaryController extends Controller {
         public Game getGame() {
             return game;
         }
+    }
+
+    private void updateStatistics() {
+        statistics = Database.getStatisticsDatabase().getStatistics();
+        double roi = Math.round(statistics.getRoi() * 100 * 100) / 100;
+        roi_Label.setText("ROI:" + roi + "%");
+        net_Label.setText("NET:" + statistics.getNet());
+        stats_Label.setText("WLP:" + statistics.getWon() + "/"
+                + statistics.getLose() + "/" + statistics.getPush());
+
     }
 }
