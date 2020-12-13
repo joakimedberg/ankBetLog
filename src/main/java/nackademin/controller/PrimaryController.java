@@ -131,10 +131,10 @@ public class PrimaryController extends Controller {
             Text team1 = new Text();
             Text team2 = new Text();
             Text versus = new Text(" v. ");
-            Text line = new Text();
+            Text line = new Text("");
             line.setStyle("-fx-font-style : italic; -fx-font-weight : bold; -fx-font-size : 80%;");
 
-            flow.getChildren().addAll(period, team1, versus, team2);
+           // flow.getChildren().addAll(period, team1, versus, team2, line);
             TableCell<DataForTable, String> cell = new TableCell<>() {
                 @Override
                 public void updateItem(String item, boolean empty) {
@@ -143,21 +143,39 @@ public class PrimaryController extends Controller {
                         setGraphic(null);
                     } else {
                         DataForTable data = getTableView().getItems().get(getIndex());
-                        team1.setText(data.getGame().getTeam1());
-                        team2.setText(data.getGame().getTeam2());
-                        period.setText(data.getBet().getPeriod());
 
-                        if (data.getBet().getCategory().equals("hcp")) {
+                        flow.getChildren().clear();
+
+                        period.setText(data.getBet().getPeriod() + " ");
+
+                        if (data.getBet().getCategory().equals("HCP")) {
                             if (data.getBet().getBet().equals("1")) {
                                 team1.setStyle("-fx-font-weight : bold;");
-                                team1.setText(" (" + data.getBet().getLine() + ") " + data.getGame().getTeam1());
+                                team1.setText(data.getGame().getTeam1());
+                                line.setText("(" + data.getBet().getLine() + ") " );
                                 team2.setText(data.getGame().getTeam2());
+                                flow.getChildren().addAll(period, line, team1, versus, team2);
+
                             } else if (data.getBet().getBet().equals("2")) {
                                 team2.setStyle("-fx-font-weight : bold;");
-                                team2.setText(data.getGame().getTeam1() + " (" + data.getBet().getLine() + ")");
-                                team1.setText(data.getGame().getTeam2());
+                                team1.setText(data.getGame().getTeam1());
+                                line.setText(" (" + data.getBet().getLine() + ")" );
+                                team2.setText(data.getGame().getTeam2());
+                                flow.getChildren().addAll(period, team1, versus, line, team2);
+                            }
+                        }if (data.getBet().getCategory().equals("OU")){
+                            if (data.getBet().getBet().equals("Over")) {
+                                team1.setText(data.getGame().getTeam1());
+                                team2.setText(data.getGame().getTeam2());
+                                line.setText(" (OVER " + data.getBet().getLine() +")");
+                            }else if (data.getBet().getBet().equals("Under")) {
+                                team1.setText(data.getGame().getTeam1());
+                                team2.setText(data.getGame().getTeam2());
+                                // line.setStyle("-fx-font-weight : bold; -fx-font-style: italic;");
+                                line.setText(" (UNDER " + data.getBet().getLine() +")");
                             }
                         }
+
 
                         setPrefHeight(flow.prefHeight(game_Column.getWidth()) + 4);
                         setGraphic(flow);
