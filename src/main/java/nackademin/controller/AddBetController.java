@@ -95,7 +95,7 @@ public class AddBetController extends Controller {
 
         Bet b = new Bet(id,date_Label.getText(), sport_Label.getText(), league_Label.getText(), team1_Label.getText(),
                 team2_Label.getText(), period_Label.getText(), category, bet, line_Field.getText(), Double.valueOf(odds_Field.getText()),
-                Double.valueOf(stake_Field.getText()), net, "TBD", true);
+                Double.valueOf(stake_Field.getText()), net, "TBD", true, false);
         b.attach(Database.getBetDatabase());
         b.attach(Database.getStatisticsDatabase());
         b.notifyUpdate();

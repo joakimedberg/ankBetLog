@@ -32,7 +32,9 @@ public class Statistics implements Subject {
     }
 
     public double getRoi() {
+        System.out.println("Roi: " + roi);
         return roi;
+
     }
 
     public void setRoi() {
@@ -72,7 +74,7 @@ public class Statistics implements Subject {
     }
 
     private void calculateRoi() {
-        roi = (net / turn) - 1;
+        roi = (net /  turn);
     }
 
     @Override

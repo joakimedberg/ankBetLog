@@ -27,7 +27,7 @@ public class BetDatabase extends Database implements Observer {
     protected void sendData() {
         String sql = "INSERT or REPLACE INTO bets('id','date','sport',"
                 + "'league', 'team1','team2','period','category'," +
-                " 'bet','line', 'odds', 'stake', 'net', 'outcome') VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                " 'bet','line', 'odds', 'stake', 'net', 'outcome', 'tbd', 'voided') VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement statement = SQLiteConnection.getInstance().connect().prepareStatement(sql);
             statement.setInt(1, bet.getId());
@@ -45,6 +45,8 @@ public class BetDatabase extends Database implements Observer {
             if (bet.getNet() != null)
                 statement.setDouble(13, bet.getNet());
             statement.setString(14, bet.getOutcome());
+            statement.setBoolean(15, bet.isTbd());
+            statement.setBoolean(16, bet.isVoided());
             statement.executeUpdate();
             System.out.println("Bet added to database.");
             SQLiteConnection.getInstance().close();
@@ -62,12 +64,7 @@ public class BetDatabase extends Database implements Observer {
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                if (bets.isEmpty() || bets.stream().noneMatch(bet -> {
-                    if (bet.getId() == id)
-                        return true;
-
-                    return false;
-                })) {
+                if (bets.isEmpty() || bets.stream().noneMatch(bet -> bet.getId() == id)) {
                     bets.add(new Bet(resultSet.getInt("id"),
                             resultSet.getString("date"),
                             resultSet.getString("sport"),
@@ -82,17 +79,14 @@ public class BetDatabase extends Database implements Observer {
                             resultSet.getDouble("stake"),
                             resultSet.getDouble("net"),
                             resultSet.getString("outcome"),
-                            resultSet.getBoolean("tbd")
+                            resultSet.getBoolean("tbd"),
+                            resultSet.getBoolean("voided")
                             )
                     );
 
                     bets.getLast().attach(this);
                     bets.getLast().attach(getStatisticsDatabase());
                 }
-            }
-
-            for (Bet b : bets) {
-                System.out.println(b.getId());
             }
 
             System.out.println("Bets fetched from database.");

@@ -10,12 +10,12 @@ public class Bet implements Subject, Cloneable {
     private String outcome, bet, period, category, line;
     private Double odds, stake, net;
     private Game game;
-    private boolean tbd;
+    private boolean tbd, voided;
     private ArrayList<Observer> observers;
 
     public Bet(int id, String date, String sport, String league, String team1, String team2, String period,
                String category, String bet, String line, Double odds, Double stake, Double net, String outcome,
-               boolean tbd) {
+               boolean tbd, boolean voided) {
         game = new Game(date, sport, league, team1, team2);
 
         this.id = id;
@@ -28,9 +28,19 @@ public class Bet implements Subject, Cloneable {
         this.net = net;
         this.outcome = outcome;
         this.tbd = tbd;
+        this.voided = voided;
 
         observers = new ArrayList<>();
 
+    }
+
+    public boolean isVoided() {
+        return voided;
+    }
+
+    public void setVoided(boolean voided) {
+        this.voided = voided;
+        notifyUpdate();
     }
 
     public String getLine() {
@@ -91,7 +101,6 @@ public class Bet implements Subject, Cloneable {
         this.outcome = outcome;
         setNet();
         setTbd(false);
-        System.out.println("Bet graded " + outcome +". Net: " + net);
     }
 
     public String getBet() {

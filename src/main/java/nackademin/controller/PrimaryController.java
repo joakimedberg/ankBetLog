@@ -179,8 +179,10 @@ public class PrimaryController extends Controller {
                         DataForTable data = getTableView().getItems().get(getIndex());
 
                         setText(String.valueOf(data.getBet().getNet()));
-                        if (data.getBet().getNet() == null) {
+                        if (data.getBet().isTbd()) {
                             setText("TBD");
+                        }else if(data.getBet().isVoided()) {
+                            setText("void");
                         }
                         else if (Double.valueOf(data.getBet().getNet()) < 0.0) {
                             setTextFill(Color.RED);
@@ -211,7 +213,14 @@ public class PrimaryController extends Controller {
                     super.updateItem(item, empty);
                     for (MenuItem i : list) {
                         i.setOnAction(event -> {
-                            getTableView().getItems().get( getIndex() ).getBet().setOutcome(i.getText() );
+
+                            if (i.getText().equals("void")) {
+                                getTableView().getItems().get( getIndex() ).getBet().setVoided(true);
+                                i.setText("void");
+                            } else {
+                                getTableView().getItems().get( getIndex() ).getBet().setOutcome(i.getText() );
+                            }
+
                             bets_Table.refresh();
                             updateStatistics();
                         });
@@ -219,7 +228,15 @@ public class PrimaryController extends Controller {
                     if (empty) {
                         setGraphic(null);
                     } else {
-                        setGraphic(menuButton);
+                        if (!getTableView().getItems().get( getIndex() ).getBet().isTbd()) {
+                            for (int i = 0; i < 5; i++) {
+                                list.get(i).setDisable(true);
+                            }
+                        }
+                        if (!getTableView().getItems().get( getIndex() ).getBet().isVoided()){
+                            setGraphic(menuButton);
+                        }
+
                     }
                 }
             };

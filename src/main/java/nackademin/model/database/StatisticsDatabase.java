@@ -53,8 +53,8 @@ public class StatisticsDatabase extends Database implements Observer {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM statistics");
 
             double net = resultSet.getDouble("net");
-            double roi = resultSet.getDouble("roi");
             double turn = resultSet.getDouble("turn");
+            double roi = resultSet.getDouble("roi");
             int won = resultSet.getInt("won");
             int lose = resultSet.getInt("lose");
             int push = resultSet.getInt("push");
@@ -78,8 +78,8 @@ public class StatisticsDatabase extends Database implements Observer {
         bet = (Bet) o;
         if (bet.isTbd())
             return;
-        if (bet.getOutcome().equals("void")) {
-            statistics.setNet(statistics.getNet() - Double.valueOf(bet.getNet()));
+        if (bet.isVoided() && !bet.isTbd()) {
+            statistics.setNet(statistics.getNet() - bet.getNet());
             statistics.setTurn(statistics.getTurn() - bet.getStake());
             statistics.setRoi();
             if (bet.getOutcome().contains("W")) {
@@ -87,10 +87,10 @@ public class StatisticsDatabase extends Database implements Observer {
             } else if (bet.getOutcome().contains("L")) {
                 statistics.setLose(statistics.getLose() - 1);
             } else if (bet.getOutcome().contains("P")) {
-                statistics.setPush(statistics.getPush() - 1);
+                 statistics.setPush(statistics.getPush() - 1);
             }
         } else {
-            statistics.setNet(statistics.getNet() + Double.valueOf(bet.getNet()));
+            statistics.setNet(statistics.getNet() + bet.getNet());
             statistics.setTurn(statistics.getTurn() + bet.getStake());
             statistics.setRoi();
             if (bet.getOutcome().contains("W")) {
