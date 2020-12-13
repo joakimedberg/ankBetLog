@@ -98,8 +98,10 @@ public class PrimaryController extends Controller {
             competition is initially empty.
             just updates twice, one each.
          */
-        competition_Column.setCellFactory(tc -> {
-
+        competition_Column
+                .setCellValueFactory(cellData -> new SimpleStringProperty(
+                        cellData.getValue().getBet().getGame().getLeague()));
+        competition_Column.setCellFactory(cellData -> {
             TableCell<DataForTable, String> cell = new TableCell<>() {
                 @Override
                 protected void updateItem(String item, boolean empty) {
@@ -107,19 +109,19 @@ public class PrimaryController extends Controller {
                     setText(empty ? null : item);
                 }
             };
-
             cell.setOnMouseClicked(e -> {
                 if (!cell.isEmpty() && count == 0) {
-                    competition_Column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGame().getSport()));
+                    competition_Column.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getGame().getSport()));
                     count = 1;
 
                 } else if (!cell.isEmpty() && count == 1) {
-                    competition_Column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGame().getLeague()));
+                    competition_Column.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getGame().getLeague()));
                     count = 0;
 
                 }
                 bets_Table.refresh();
             });
+
 
             return cell;
         });
@@ -135,7 +137,7 @@ public class PrimaryController extends Controller {
             line.setStyle("-fx-font-style : italic; -fx-font-weight : bold; -fx-font-size : 80%;");
 
             flow.getChildren().addAll(period, team1, versus, team2, line);
-            TableCell<DataForTable, String> cell = new TableCell<>() {
+            return new TableCell<>() {
                 @Override
                 public void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
@@ -150,27 +152,27 @@ public class PrimaryController extends Controller {
                             if (data.getBet().getBet().equals("1")) {
                                 team1.setStyle("-fx-font-weight : bold;");
                                 team1.setText(data.getGame().getTeam1());
-                                line.setText(" (" + data.getBet().getLine() + ") " );
+                                line.setText(" (" + data.getBet().getLine() + ") ");
                                 team2.setText(data.getGame().getTeam2());
 
                             } else if (data.getBet().getBet().equals("2")) {
                                 team2.setStyle("-fx-font-weight : bold;");
                                 team1.setText(data.getGame().getTeam1());
-                                line.setText(" (" + data.getBet().getLine() + ")" );
+                                line.setText(" (" + data.getBet().getLine() + ")");
                                 team2.setText(data.getGame().getTeam2());
 
                             }
-                        } else if (data.getBet().getCategory().equals("OU")){
+                        } else if (data.getBet().getCategory().equals("OU")) {
                             if (data.getBet().getBet().equals("Over")) {
                                 team1.setText(data.getGame().getTeam1());
                                 team2.setText(data.getGame().getTeam2());
-                                line.setText(" (OVER " + data.getBet().getLine() +")");
-                            }else if (data.getBet().getBet().equals("Under")) {
+                                line.setText(" (OVER " + data.getBet().getLine() + ")");
+                            } else if (data.getBet().getBet().equals("Under")) {
                                 team1.setText(data.getGame().getTeam1());
                                 team2.setText(data.getGame().getTeam2());
-                                line.setText(" (UNDER " + data.getBet().getLine() +")");
+                                line.setText(" (UNDER " + data.getBet().getLine() + ")");
                             }
-                        }else if (data.getBet().getCategory().equals("ML")) {
+                        } else if (data.getBet().getCategory().equals("ML")) {
                             if (data.getBet().getBet().equals("1")) {
                                 team1.setStyle("-fx-font-weight : bold;");
                                 team1.setText(data.getGame().getTeam1());
@@ -182,7 +184,8 @@ public class PrimaryController extends Controller {
                                 team2.setText(data.getGame().getTeam2());
 
                             }
-                        }if (data.getBet().getCategory().equals("3WAY")) {
+                        }
+                        if (data.getBet().getCategory().equals("3WAY")) {
                             if (data.getBet().getBet().equals("1")) {
                                 team1.setStyle("-fx-font-weight : bold;");
                                 team1.setText(data.getGame().getTeam1());
@@ -192,7 +195,7 @@ public class PrimaryController extends Controller {
                                 team2.setStyle("-fx-font-weight : bold;");
                                 team1.setText(data.getGame().getTeam1());
                                 team2.setText(data.getGame().getTeam2());
-                            }else if (data.getBet().getBet().equals("X")) {
+                            } else if (data.getBet().getBet().equals("X")) {
                                 team1.setText(data.getGame().getTeam1());
                                 team2.setText(data.getGame().getTeam2());
                                 line.setText(" X ");
@@ -204,37 +207,32 @@ public class PrimaryController extends Controller {
                     }
                 }
             };
-            return cell;
         });
         odds_Column.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getBet().getOdds()));
         stake_Column.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getBet().getStake()));
-        net_Column.setCellFactory(cellData -> {
-            TableCell<DataForTable, Number> cell = new TableCell<>() {
-                @Override
-                public void updateItem(Number item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setGraphic(null);
-                    } else {
-                        DataForTable data = getTableView().getItems().get(getIndex());
+        net_Column.setCellFactory(cellData -> new TableCell<>() {
+            @Override
+            public void updateItem(Number item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    DataForTable data = getTableView().getItems().get(getIndex());
 
-                        setText(String.valueOf(data.getBet().getNet()));
-                        if (data.getBet().isTbd()) {
-                            setText("TBD");
-                        }else if(data.getBet().isVoided()) {
-                            setText("void");
-                        }
-                        else if (Double.valueOf(data.getBet().getNet()) < 0.0) {
-                            setTextFill(Color.RED);
-                        } else if (Double.valueOf(data.getBet().getNet()) == 0.0) {
-                            setTextFill(Color.BLACK);
-                        } else
-                            setTextFill(Color.GREEN);
+                    setText(String.valueOf(data.getBet().getNet()));
+                    if (data.getBet().isTbd()) {
+                        setText("TBD");
+                    } else if (data.getBet().isVoided()) {
+                        setText("void");
+                    } else if (data.getBet().getNet() < 0.0) {
+                        setTextFill(Color.RED);
+                    } else if (data.getBet().getNet() == 0.0) {
+                        setTextFill(Color.BLACK);
+                    } else
+                        setTextFill(Color.GREEN);
 
-                    }
                 }
-            };
-            return cell;
+            }
         });
 
         edit_Column.setCellFactory(cellData -> {
@@ -247,7 +245,7 @@ public class PrimaryController extends Controller {
             menuButton.getItems().add(menu);
             menu.getItems().addAll(list);
 
-            TableCell<DataForTable, String> cell = new TableCell<>() {
+            return new TableCell<>() {
                 @Override
                 public void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
@@ -255,10 +253,10 @@ public class PrimaryController extends Controller {
                         i.setOnAction(event -> {
 
                             if (i.getText().equals("void")) {
-                                getTableView().getItems().get( getIndex() ).getBet().setVoided(true);
+                                getTableView().getItems().get(getIndex()).getBet().setVoided(true);
                                 i.setText("void");
                             } else {
-                                getTableView().getItems().get( getIndex() ).getBet().setOutcome(i.getText() );
+                                getTableView().getItems().get(getIndex()).getBet().setOutcome(i.getText());
                             }
 
                             bets_Table.refresh();
@@ -268,19 +266,18 @@ public class PrimaryController extends Controller {
                     if (empty) {
                         setGraphic(null);
                     } else {
-                        if (!getTableView().getItems().get( getIndex() ).getBet().isTbd()) {
+                        if (!getTableView().getItems().get(getIndex()).getBet().isTbd()) {
                             for (int i = 0; i < 5; i++) {
                                 list.get(i).setDisable(true);
                             }
                         }
-                        if (!getTableView().getItems().get( getIndex() ).getBet().isVoided()){
+                        if (!getTableView().getItems().get(getIndex()).getBet().isVoided()) {
                             setGraphic(menuButton);
                         }
 
                     }
                 }
             };
-            return cell;
         });
 
         bets_Table.widthProperty()
