@@ -59,21 +59,18 @@ public class PrimaryController extends Controller {
 
 
     public void updateTable(){
-
-        bets.add(0,new DataForTable(Database.getBetDatabase().getBets().getLast(), Database.getBetDatabase().getBets().getLast().getGame()));
+        bet = Database.getBetDatabase().getBets().getLast();
+        bets.add(0,new DataForTable(bet, bet.getGame()));
         bets_Table.refresh();
     }
 
 
     @FXML
     public void initialize() {
-
         name_Label.setText(Database.getUserDatabase().getUser().getUsername());
 
         updateStatistics();
-
         initTable();
-
         populateTable();
 
     }
@@ -87,7 +84,6 @@ public class PrimaryController extends Controller {
     private void addBet() {
         view.loadAddBetView(addBet_Button);
     }
-
 
     @Override
     public void setView(View view) {
@@ -183,7 +179,7 @@ public class PrimaryController extends Controller {
                         DataForTable data = getTableView().getItems().get(getIndex());
 
                         setText(String.valueOf(data.getBet().getNet()));
-                        if (data.getBet().getNet().equals("TBD")) {
+                        if (data.getBet().getNet() == null) {
                             setText("TBD");
                         }
                         else if (Double.valueOf(data.getBet().getNet()) < 0.0) {
@@ -198,7 +194,6 @@ public class PrimaryController extends Controller {
             };
             return cell;
         });
-
 
         edit_Column.setCellFactory(cellData -> {
 
@@ -216,7 +211,7 @@ public class PrimaryController extends Controller {
                     super.updateItem(item, empty);
                     for (MenuItem i : list) {
                         i.setOnAction(event -> {
-                            getTableView().getItems().get(getIndex()).getBet().setOutcome(i.getText());
+                            getTableView().getItems().get( getIndex() ).getBet().setOutcome(i.getText() );
                             bets_Table.refresh();
                             updateStatistics();
                         });

@@ -7,13 +7,16 @@ import java.util.ArrayList;
 public class Bet implements Subject, Cloneable {
 
     private int id;
-    private String outcome, bet, period, category, line, net;
-    private Double odds, stake;
+    private String outcome, bet, period, category, line;
+    private Double odds, stake, net;
     private Game game;
+    private boolean tbd;
     private ArrayList<Observer> observers;
 
-    public Bet(int id, String date, String sport, String league, String team1, String team2, String period, String category, String bet, String line, Double odds, Double stake, String net, String outcome, boolean tbd) {
-        game = new Game(date, sport, league, team1, team2, tbd);
+    public Bet(int id, String date, String sport, String league, String team1, String team2, String period,
+               String category, String bet, String line, Double odds, Double stake, Double net, String outcome,
+               boolean tbd) {
+        game = new Game(date, sport, league, team1, team2);
 
         this.id = id;
         this.odds = odds;
@@ -24,6 +27,7 @@ public class Bet implements Subject, Cloneable {
         this.line = line;
         this.net = net;
         this.outcome = outcome;
+        this.tbd = tbd;
 
         observers = new ArrayList<>();
 
@@ -47,18 +51,16 @@ public class Bet implements Subject, Cloneable {
 
     private void calculateNet() {
         if (outcome.equals("PUSH")) {
-            net = String.valueOf(0);
+            net = 0.0;
         } else if (outcome.equals("WIN")) {
-            net = String.valueOf((odds * stake) - stake);
+            net = (odds * stake) - stake;
         } else if (outcome.equals("1/2WIN")) {
-            net = String.valueOf(((odds * stake) / 2) - stake);
+            net = ((odds * stake) / 2) - stake;
         } else if (outcome.equals("LOSS")) {
-            net = String.valueOf(-stake);
+            net = -stake;
         } else if (outcome.equals("1/2LOSS")) {
-            net = String.valueOf(- (stake/2));
+            net = - (stake/2);
         }
-
-
     }
 
     public int getId() {
@@ -73,8 +75,12 @@ public class Bet implements Subject, Cloneable {
         return stake;
     }
 
-    public String getNet() {
+    public Double getNet() {
         return net;
+    }
+
+    private void setNet() {
+        calculateNet();
     }
 
     public String getOutcome() {
@@ -82,20 +88,23 @@ public class Bet implements Subject, Cloneable {
     }
 
     public void setOutcome(String outcome) {
-        if (!outcome.equals("void")){
-            this.outcome = outcome;
-            game.setTbd(false);
-            calculateNet();
-        } else if (outcome.equals("void") & game.isTbd()) {
-
-        }
-
-
-        notifyUpdate();
+        this.outcome = outcome;
+        setNet();
+        setTbd(false);
+        System.out.println("Bet graded " + outcome +". Net: " + net);
     }
 
     public String getBet() {
         return bet;
+    }
+
+    public boolean isTbd() {
+        return tbd;
+    }
+
+    private void setTbd(boolean tbd) {
+        this.tbd = tbd;
+        notifyUpdate();
     }
 
     @Override

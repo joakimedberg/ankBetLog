@@ -42,7 +42,8 @@ public class BetDatabase extends Database implements Observer {
             statement.setString(10, bet.getLine());
             statement.setDouble(11, bet.getOdds());
             statement.setDouble(12, bet.getStake());
-            statement.setString(13, bet.getNet());
+            if (bet.getNet() != null)
+                statement.setDouble(13, bet.getNet());
             statement.setString(14, bet.getOutcome());
             statement.executeUpdate();
             System.out.println("Bet added to database.");
@@ -79,13 +80,12 @@ public class BetDatabase extends Database implements Observer {
                             resultSet.getString("line"),
                             resultSet.getDouble("odds"),
                             resultSet.getDouble("stake"),
-                            resultSet.getString("net"),
+                            resultSet.getDouble("net"),
                             resultSet.getString("outcome"),
                             resultSet.getBoolean("tbd")
                             )
                     );
 
-                    System.out.println("hej " + bets.getLast().getId());
                     bets.getLast().attach(this);
                     bets.getLast().attach(getStatisticsDatabase());
                 }

@@ -61,21 +61,15 @@ public class AddBetController extends Controller {
             }
         });
 
-        sport_Field.textProperty().addListener((observable, oldValue, newValue) -> {
-            sport_Label.setText(newValue);
-        });
-        league_Field.textProperty().addListener((observable, oldValue, newValue) -> {
-            league_Label.setText(newValue);
-        });
+        sport_Field.textProperty().addListener((observable, oldValue, newValue) -> sport_Label.setText(newValue));
+        league_Field.textProperty().addListener((observable, oldValue, newValue) -> league_Label.setText(newValue));
         team1_Field.textProperty().addListener((observable, oldValue, newValue) -> {
             team1_Label.setText(newValue);
             if (!team1_Label.getText().isEmpty())
                 versus_Label.setText("v.");
 
         });
-        team2_Field.textProperty().addListener((observable, oldValue, newValue) -> {
-            team2_Label.setText(newValue);
-        });
+        team2_Field.textProperty().addListener((observable, oldValue, newValue) -> team2_Label.setText(newValue));
 
     }
 
@@ -92,6 +86,7 @@ public class AddBetController extends Controller {
         }
 
         int id;
+        Double net = null;
         if (Database.getBetDatabase().getBets().isEmpty()) {
             id = 1;
         } else {
@@ -100,7 +95,7 @@ public class AddBetController extends Controller {
 
         Bet b = new Bet(id,date_Label.getText(), sport_Label.getText(), league_Label.getText(), team1_Label.getText(),
                 team2_Label.getText(), period_Label.getText(), category, bet, line_Field.getText(), Double.valueOf(odds_Field.getText()),
-                Double.valueOf(stake_Field.getText()), "TBD", "TBD", true);
+                Double.valueOf(stake_Field.getText()), net, "TBD", true);
         b.attach(Database.getBetDatabase());
         b.attach(Database.getStatisticsDatabase());
         b.notifyUpdate();

@@ -31,17 +31,6 @@ public class StatisticsDatabase extends Database implements Observer {
         try {
             PreparedStatement statement = SQLiteConnection.getInstance().connect().prepareStatement(sql);
 
-            statistics.setNet(statistics.getNet() + Double.valueOf(bet.getNet()));
-            statistics.setTurn(statistics.getTurn() + bet.getStake());
-            statistics.setRoi();
-            if (bet.getOutcome().contains("W")) {
-                statistics.setWon(statistics.getWon() + 1);
-            } else if (bet.getOutcome().contains("L")) {
-                statistics.setLose(statistics.getLose() + 1);
-            } else if (bet.getOutcome().contains("P")) {
-                statistics.setPush(statistics.getPush() + 1);
-            }
-
             statement.setDouble(1, statistics.getNet());
             statement.setDouble(2, statistics.getTurn());
             statement.setDouble(3, statistics.getRoi());
@@ -87,15 +76,32 @@ public class StatisticsDatabase extends Database implements Observer {
     @Override
     public void update(Object o) {
         bet = (Bet) o;
-        if (!bet.getOutcome().equals("TBD"))
-            if (bet.getOutcome().equals("void") && !bet.getGame().isTbd()){
-                try {
-                    bet = (Bet) bet.clone();
-                    bet.setOutcome("void");
-                } catch (CloneNotSupportedException e) {
-                    e.printStackTrace();
-                }
+        if (bet.isTbd())
+            return;
+        if (bet.getOutcome().equals("void")) {
+            statistics.setNet(statistics.getNet() - Double.valueOf(bet.getNet()));
+            statistics.setTurn(statistics.getTurn() - bet.getStake());
+            statistics.setRoi();
+            if (bet.getOutcome().contains("W")) {
+                statistics.setWon(statistics.getWon() - 1);
+            } else if (bet.getOutcome().contains("L")) {
+                statistics.setLose(statistics.getLose() - 1);
+            } else if (bet.getOutcome().contains("P")) {
+                statistics.setPush(statistics.getPush() - 1);
             }
-                sendData();
+        } else {
+            statistics.setNet(statistics.getNet() + Double.valueOf(bet.getNet()));
+            statistics.setTurn(statistics.getTurn() + bet.getStake());
+            statistics.setRoi();
+            if (bet.getOutcome().contains("W")) {
+                statistics.setWon(statistics.getWon() + 1);
+            } else if (bet.getOutcome().contains("L")) {
+                statistics.setLose(statistics.getLose() + 1);
+            } else if (bet.getOutcome().contains("P")) {
+                statistics.setPush(statistics.getPush() + 1);
+            }
+        }
+
+        sendData();
     }
 }
