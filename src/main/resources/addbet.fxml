@@ -44,6 +44,12 @@
                   <MenuItem mnemonicParsing="false" onAction="#setCategory" text="Under" />
               </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="ML">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#setCategory" text="1" />
+                  <MenuItem mnemonicParsing="false" onAction="#setCategory" text="2" />
+              </items>
+            </Menu>
          </items>
       </MenuButton>
       <MenuButton fx:id="period_MenuButton" layoutX="7.0" layoutY="83.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="57.0">

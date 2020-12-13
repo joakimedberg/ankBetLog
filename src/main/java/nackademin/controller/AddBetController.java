@@ -23,8 +23,6 @@ public class AddBetController extends Controller {
     @FXML
     private MenuButton category_MenuButton, period_MenuButton;
     @FXML
-    private Button add_Button;
-    @FXML
     private Label versus_Label,date_Label, period_Label, sport_Label, league_Label, team1_Label, team2_Label;
     @FXML
     private VBox betDetails_Box;
@@ -41,9 +39,10 @@ public class AddBetController extends Controller {
     @FXML
     public void initialize() {
 
-
         fields = new ArrayList<>();
         Collections.addAll(fields, sport_Field, league_Field, odds_Field, stake_Field, team1_Field, team2_Field, line_Field);
+
+        line_Field.setDisable(true);
 
         betDetails_Box.setStyle("-fx-border-style: solid; -fx-border-width: 5px; -fx-border-color: black; -fx-background-color: white");
         period_MenuButton.setGraphic(new ImageView(String.valueOf(getClass().getResource("/stopwatch.png"))));
@@ -129,6 +128,13 @@ public class AddBetController extends Controller {
         bet = ((MenuItem) event.getSource()).getText();
         category =  ((MenuItem) event.getSource()).getParentMenu().getText();
         category_MenuButton.setText(category + " (" + bet + ")");
+
+        System.out.println(category);
+        if (!category.equals("ML") && !category.equals("3WAY")) {
+            line_Field.setDisable(false);
+        } else {
+            line_Field.setDisable(true);
+        }
 
     }
 
