@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nackademin.controller.PrimaryController">
     <children>
-        <TableView fx:id="bets_Table" layoutY="97.0" maxWidth="800.0" minWidth="800.0" prefHeight="339.0" prefWidth="800.0">
+        <TableView fx:id="bets_Table" layoutY="97.0" maxWidth="800.0" minWidth="800.0" prefHeight="339.0" prefWidth="800.0" stylesheets="@table.css">
             <columns>
                 <TableColumn fx:id="id_Column" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" resizable="false" text="ID" />
                 <TableColumn fx:id="date_Column" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" resizable="false" text="DATE" />

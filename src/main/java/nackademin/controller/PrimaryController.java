@@ -56,6 +56,7 @@ public class PrimaryController extends Controller {
 
 
     public void updateTable(){
+        bets_Table.getStyleClass().add("no-header");
         Bet bet = Database.getBetDatabase().getBets().getLast();
         bets.add(0,new DataForTable(bet, bet.getGame()));
         bets_Table.refresh();
@@ -94,30 +95,7 @@ public class PrimaryController extends Controller {
         competition_Column
                 .setCellValueFactory(cellData -> new SimpleStringProperty(
                         cellData.getValue().getBet().getGame().getLeague()));
-        competition_Column.setCellFactory(cellData -> {
-            TableCell<DataForTable, String> cell = new TableCell<>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    setText(empty ? null : item);
-                }
-            };
-            cell.setOnMouseClicked(e -> {
-                if (!cell.isEmpty() && count == 0) {
-                    competition_Column.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getGame().getSport()));
-                    count = 1;
-
-                } else if (!cell.isEmpty() && count == 1) {
-                    competition_Column.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getGame().getLeague()));
-                    count = 0;
-
-                }
-                bets_Table.refresh();
-            });
-
-
-            return cell;
-        });
+       
         game_Column.setCellFactory(cellData -> {
 
             TextFlow flow = new TextFlow();
@@ -280,20 +258,6 @@ public class PrimaryController extends Controller {
                 }
             };
         });
-
-        bets_Table.widthProperty()
-                .addListener((ov, t, t1) -> {
-                    // Get the table header
-                    Pane header = (Pane) bets_Table
-                            .lookup("TableHeaderRow");
-                    if (header != null && header.isVisible()) {
-                        header.setMaxHeight(0);
-                        header.setMinHeight(0);
-                        header.setPrefHeight(0);
-                        header.setVisible(false);
-                        header.setManaged(false);
-                    }
-                });
     }
 
     private void populateTable() {
