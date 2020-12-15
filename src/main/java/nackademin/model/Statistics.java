@@ -32,7 +32,6 @@ public class Statistics implements Subject {
     }
 
     public double getRoi() {
-        System.out.println("Roi: " + roi);
         return roi;
 
     }

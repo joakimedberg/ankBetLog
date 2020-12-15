@@ -76,7 +76,7 @@ public class AddBetController extends Controller {
     @FXML
     private void addBet() {
         for (TextField tf : fields) {
-            if (tf.getText().isEmpty()) {
+            if (tf.getText().isEmpty()  && !tf.isDisabled()) {
                 return;
             }
         }
@@ -89,7 +89,8 @@ public class AddBetController extends Controller {
         if (Database.getBetDatabase().getBets().isEmpty()) {
             id = 1;
         } else {
-            id = Database.getBetDatabase().getBets().getFirst().getId() + 1;
+            id = Database.getBetDatabase().getBets().getLast().getId() + 1;
+            System.out.println("id " + id);
         }
 
         Bet b = new Bet(id,date_Label.getText(), sport_Label.getText(), league_Label.getText(), team1_Label.getText(),
@@ -129,7 +130,6 @@ public class AddBetController extends Controller {
         category =  ((MenuItem) event.getSource()).getParentMenu().getText();
         category_MenuButton.setText(category + " (" + bet + ")");
 
-        System.out.println(category);
         if (!category.equals("ML") && !category.equals("3WAY")) {
             line_Field.setDisable(false);
         } else {

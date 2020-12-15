@@ -29,37 +29,34 @@ public class PrimaryController extends Controller {
     @FXML
     private Label name_Label, roi_Label, net_Label, stats_Label;
     @FXML
-    TableView<DataForTable> bets_Table;
+    private TableView<DataForTable> bets_Table;
     @FXML
-    TableColumn<DataForTable, Number> id_Column;
+    private TableColumn<DataForTable, Number> id_Column;
     @FXML
-    TableColumn<DataForTable, String> date_Column;
+    private TableColumn<DataForTable, String> date_Column;
     @FXML
-    TableColumn<DataForTable, String> competition_Column;
+    private TableColumn<DataForTable, String> competition_Column;
     @FXML
-    TableColumn<DataForTable, String> game_Column;
+    private TableColumn<DataForTable, String> game_Column;
     @FXML
-    TableColumn<DataForTable, Number> odds_Column;
+    private TableColumn<DataForTable, Number> odds_Column;
     @FXML
-    TableColumn<DataForTable, Number> stake_Column;
+    private TableColumn<DataForTable, Number> stake_Column;
     @FXML
-    TableColumn<DataForTable, Number> net_Column;
+    private TableColumn<DataForTable, Number> net_Column;
     @FXML
-    TableColumn<DataForTable, String> edit_Column;
+    private TableColumn<DataForTable, String> edit_Column;
     @FXML
-    Button addBet_Button;
+    private Button addBet_Button;
 
 
     private View view;
     private int count;
     private ObservableList<DataForTable> bets;
-    private String outcome;
-    private Bet bet;
-    private Statistics statistics;
 
 
     public void updateTable(){
-        bet = Database.getBetDatabase().getBets().getLast();
+        Bet bet = Database.getBetDatabase().getBets().getLast();
         bets.add(0,new DataForTable(bet, bet.getGame()));
         bets_Table.refresh();
     }
@@ -94,10 +91,6 @@ public class PrimaryController extends Controller {
         count = 0;
         id_Column.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getBet().getId()));
         date_Column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGame().getDate()));
-        /* TODO
-            competition is initially empty.
-            just updates twice, one each.
-         */
         competition_Column
                 .setCellValueFactory(cellData -> new SimpleStringProperty(
                         cellData.getValue().getBet().getGame().getLeague()));
@@ -148,57 +141,65 @@ public class PrimaryController extends Controller {
 
                         period.setText(data.getBet().getPeriod() + " ");
 
-                        if (data.getBet().getCategory().equals("HCP")) {
-                            if (data.getBet().getBet().equals("1")) {
-                                team1.setStyle("-fx-font-weight : bold;");
-                                team1.setText(data.getGame().getTeam1());
-                                line.setText(" (" + data.getBet().getLine() + ") ");
-                                team2.setText(data.getGame().getTeam2());
+                        switch (data.getBet().getCategory()) {
+                            case "HCP":
+                                if (data.getBet().getBet().equals("1")) {
+                                    team1.setStyle("-fx-font-weight : bold;");
+                                    team1.setText(data.getGame().getTeam1());
+                                    line.setText(" (" + data.getBet().getLine() + ") ");
+                                    team2.setText(data.getGame().getTeam2());
 
-                            } else if (data.getBet().getBet().equals("2")) {
-                                team2.setStyle("-fx-font-weight : bold;");
-                                team1.setText(data.getGame().getTeam1());
-                                line.setText(" (" + data.getBet().getLine() + ")");
-                                team2.setText(data.getGame().getTeam2());
+                                } else if (data.getBet().getBet().equals("2")) {
+                                    team2.setStyle("-fx-font-weight : bold;");
+                                    team1.setText(data.getGame().getTeam1());
+                                    line.setText(" (" + data.getBet().getLine() + ")");
+                                    team2.setText(data.getGame().getTeam2());
 
-                            }
-                        } else if (data.getBet().getCategory().equals("OU")) {
-                            if (data.getBet().getBet().equals("Over")) {
-                                team1.setText(data.getGame().getTeam1());
-                                team2.setText(data.getGame().getTeam2());
-                                line.setText(" (OVER " + data.getBet().getLine() + ")");
-                            } else if (data.getBet().getBet().equals("Under")) {
-                                team1.setText(data.getGame().getTeam1());
-                                team2.setText(data.getGame().getTeam2());
-                                line.setText(" (UNDER " + data.getBet().getLine() + ")");
-                            }
-                        } else if (data.getBet().getCategory().equals("ML")) {
-                            if (data.getBet().getBet().equals("1")) {
-                                team1.setStyle("-fx-font-weight : bold;");
-                                team1.setText(data.getGame().getTeam1());
-                                team2.setText(data.getGame().getTeam2());
+                                }
+                                break;
+                            case "OU":
+                                if (data.getBet().getBet().equals("Over")) {
+                                    team1.setText(data.getGame().getTeam1());
+                                    team2.setText(data.getGame().getTeam2());
+                                    line.setText(" (OVER " + data.getBet().getLine() + ")");
+                                } else if (data.getBet().getBet().equals("Under")) {
+                                    team1.setText(data.getGame().getTeam1());
+                                    team2.setText(data.getGame().getTeam2());
+                                    line.setText(" (UNDER " + data.getBet().getLine() + ")");
+                                }
+                                break;
+                            case "ML":
+                                if (data.getBet().getBet().equals("1")) {
+                                    team1.setStyle("-fx-font-weight : bold;");
+                                    team1.setText(data.getGame().getTeam1());
+                                    team2.setText(data.getGame().getTeam2());
 
-                            } else if (data.getBet().getBet().equals("2")) {
-                                team2.setStyle("-fx-font-weight : bold;");
-                                team1.setText(data.getGame().getTeam1());
-                                team2.setText(data.getGame().getTeam2());
+                                } else if (data.getBet().getBet().equals("2")) {
+                                    team2.setStyle("-fx-font-weight : bold;");
+                                    team1.setText(data.getGame().getTeam1());
+                                    team2.setText(data.getGame().getTeam2());
 
-                            }
+                                }
+                                break;
                         }
                         if (data.getBet().getCategory().equals("3WAY")) {
-                            if (data.getBet().getBet().equals("1")) {
-                                team1.setStyle("-fx-font-weight : bold;");
-                                team1.setText(data.getGame().getTeam1());
-                                team2.setText(data.getGame().getTeam2());
+                            switch (data.getBet().getBet()) {
+                                case "1":
+                                    team1.setStyle("-fx-font-weight : bold;");
+                                    team1.setText(data.getGame().getTeam1());
+                                    team2.setText(data.getGame().getTeam2());
 
-                            } else if (data.getBet().getBet().equals("2")) {
-                                team2.setStyle("-fx-font-weight : bold;");
-                                team1.setText(data.getGame().getTeam1());
-                                team2.setText(data.getGame().getTeam2());
-                            } else if (data.getBet().getBet().equals("X")) {
-                                team1.setText(data.getGame().getTeam1());
-                                team2.setText(data.getGame().getTeam2());
-                                line.setText(" X ");
+                                    break;
+                                case "2":
+                                    team2.setStyle("-fx-font-weight : bold;");
+                                    team1.setText(data.getGame().getTeam1());
+                                    team2.setText(data.getGame().getTeam2());
+                                    break;
+                                case "X":
+                                    team1.setText(data.getGame().getTeam1());
+                                    team2.setText(data.getGame().getTeam2());
+                                    line.setText(" X ");
+                                    break;
                             }
                         }
 
@@ -322,7 +323,7 @@ public class PrimaryController extends Controller {
     }
 
     private void updateStatistics() {
-        statistics = Database.getStatisticsDatabase().getStatistics();
+        Statistics statistics = Database.getStatisticsDatabase().getStatistics();
         double roi = Math.round(statistics.getRoi() * 100 * 100) / 100;
         roi_Label.setText("ROI:" + roi + "%");
         net_Label.setText("NET:" + statistics.getNet());

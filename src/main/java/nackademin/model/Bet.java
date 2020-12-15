@@ -4,9 +4,9 @@ import nackademin.observer.Observer;
 import nackademin.observer.Subject;
 import java.util.ArrayList;
 
-public class Bet implements Subject, Cloneable {
+public class Bet implements Subject{
 
-    private int id;
+    private final int  id;
     private String outcome, bet, period, category, line;
     private Double odds, stake, net;
     private Game game;
@@ -65,7 +65,8 @@ public class Bet implements Subject, Cloneable {
         } else if (outcome.equals("WIN")) {
             net = (odds * stake) - stake;
         } else if (outcome.equals("1/2WIN")) {
-            net = ((odds * stake) / 2) - stake;
+            net = (odds * stake) - stake;
+            net = net / 2;
         } else if (outcome.equals("LOSS")) {
             net = -stake;
         } else if (outcome.equals("1/2LOSS")) {
@@ -129,10 +130,5 @@ public class Bet implements Subject, Cloneable {
             o.update(this);
         }
     }
-    @Override
-    public Object clone()
-            throws CloneNotSupportedException
-    {
-        return super.clone();
-    }
+
 }
