@@ -2,11 +2,9 @@ package nackademin.controller;
 
 import nackademin.model.Model;
 import nackademin.view.View;
+interface Controller {
 
-
-public abstract class Controller {
-
-    protected abstract void setView(View view);
-    protected abstract void setModel(Model model);
+    void setView(View view);
+    void setModel(Model model);
 
 }

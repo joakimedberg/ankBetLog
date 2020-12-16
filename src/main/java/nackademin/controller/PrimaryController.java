@@ -19,7 +19,7 @@ import nackademin.view.View;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class PrimaryController extends Controller {
+public class PrimaryController implements Controller {
 
     @FXML
     private Label name_Label, roi_Label, net_Label, stats_Label;

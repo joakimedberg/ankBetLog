@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import nackademin.model.Model;
 import nackademin.view.View;
 
-public class LobbyController extends Controller {
+public class LobbyController implements Controller {
     @FXML
     Button login_Button;
     @FXML

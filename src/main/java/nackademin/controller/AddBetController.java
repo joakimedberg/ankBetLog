@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class AddBetController extends Controller {
+public class AddBetController implements Controller {
 
     @FXML
     private DatePicker date_Picker;
