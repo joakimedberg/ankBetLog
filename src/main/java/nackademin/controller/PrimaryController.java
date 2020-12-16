@@ -50,6 +50,7 @@ public class PrimaryController extends Controller {
     private Model model;
     private ObservableList<DataForTable> bets;
 
+
     public void updateTable(){
         bets_Table.getStyleClass().add("no-header");
         Bet bet = model.getBetDatabase().getBets().getLast();
@@ -58,14 +59,13 @@ public class PrimaryController extends Controller {
     }
 
 
-    @FXML
-    public void initialize() {
+
+    private void init() {
         name_Label.setText(model.getUserDatabase().getUser().getUsername());
 
         updateStatistics();
         initTable();
         populateTable();
-
     }
 
     @FXML
@@ -86,7 +86,7 @@ public class PrimaryController extends Controller {
     @Override
     public void setModel(Model model) {
         this.model = model;
-        System.out.println("prim " + model);
+        init();
     }
 
     private void initTable() {

@@ -37,12 +37,14 @@ public class View {
     public void loadPrimaryView() {
 
         try {
+
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/primary.fxml"));
-            primaryController = new PrimaryController();
+            parent = loader.load();
+            primaryController = loader.getController();
             primaryController.setView(this);
             primaryController.setModel(model);
-            loader.setController(primaryController);
-            parent = loader.load();
+
             stage.setScene(new Scene(parent));
             stage.show();
         } catch (IOException e) {
@@ -54,8 +56,6 @@ public class View {
 
     public void loadLobbyView() {
         try {
-            System.out.println(this);
-            System.out.println(model);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/lobby.fxml"));
             parent = loader.load();
             LobbyController lobbyController = loader.getController();
