@@ -6,13 +6,12 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
-import nackademin.model.Bet;
-import nackademin.model.database.Database;
+import nackademin.model.Model;
+import nackademin.model.enteties.Bet;
 import nackademin.view.View;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 
 public class AddBetController extends Controller {
 
@@ -30,7 +29,8 @@ public class AddBetController extends Controller {
     private View view;
     private ArrayList<TextField> fields;
     private String category, period, bet;
-    PrimaryController primaryController;
+    private PrimaryController primaryController;
+    private Model model;
 
     public void setPrimaryController(PrimaryController primaryController){
         this.primaryController = primaryController;
@@ -86,18 +86,18 @@ public class AddBetController extends Controller {
 
         int id;
         Double net = null;
-        if (Database.getBetDatabase().getBets().isEmpty()) {
+        if (model.getBetDatabase().getBets().isEmpty()) {
             id = 1;
         } else {
-            id = Database.getBetDatabase().getBets().getLast().getId() + 1;
+            id = model.getBetDatabase().getBets().getLast().getId() + 1;
             System.out.println("id " + id);
         }
 
         Bet b = new Bet(id,date_Label.getText(), sport_Label.getText(), league_Label.getText(), team1_Label.getText(),
                 team2_Label.getText(), period_Label.getText(), category, bet, line_Field.getText(), Double.valueOf(odds_Field.getText()),
                 Double.valueOf(stake_Field.getText()), net, "TBD", true, false);
-        b.attach(Database.getBetDatabase());
-        b.attach(Database.getStatisticsDatabase());
+        b.attach(model.getBetDatabase());
+        b.attach(model.getStatisticsDatabase());
         b.notifyUpdate();
         primaryController.updateTable();
         view.closeAddBetView();
@@ -141,5 +141,10 @@ public class AddBetController extends Controller {
     @Override
     public void setView(View view) {
         this.view = view;
+    }
+
+    @Override
+    public void setModel(Model model) {
+        this.model = model;
     }
 }

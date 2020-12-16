@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import nackademin.model.database.Database;
+import nackademin.model.Model;
 import nackademin.view.View;
 
 public class LobbyController extends Controller {
@@ -18,12 +18,14 @@ public class LobbyController extends Controller {
     Button exit_Button;
 
     private View view;
+    private Model model;
 
 
     @FXML
     private void login() {
-        if (Database.getUserDatabase().getUser().getUsername().equals(username_Field.getText()) &&
-                Database.getUserDatabase().getUser().getPassword().equals(password_Field.getText())) {
+        if (model.getUserDatabase().getUser().getUsername().equals(username_Field.getText()) &&
+                model.getUserDatabase().getUser().getPassword().equals(password_Field.getText())) {
+            System.out.println("User logged in...");
             view.loadPrimaryView();
         }
     }
@@ -35,6 +37,11 @@ public class LobbyController extends Controller {
     @Override
     public void setView(View view) {
         this.view = view;
+    }
+
+    @Override
+    public void setModel(Model model) {
+        this.model = model;
     }
 
 

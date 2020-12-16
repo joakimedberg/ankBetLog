@@ -1,7 +1,7 @@
 package nackademin.model.database;
 
-import nackademin.model.Bet;
-import nackademin.model.Statistics;
+import nackademin.model.enteties.Bet;
+import nackademin.model.enteties.Statistics;
 import nackademin.observer.Observer;
 
 import java.sql.PreparedStatement;
@@ -10,19 +10,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class StatisticsDatabase extends Database implements Observer {
-    private static StatisticsDatabase statisticsDatabase;
     private Statistics statistics;
     private Bet bet;
 
-    private StatisticsDatabase() {
+    public StatisticsDatabase() {
         System.out.println("New Statistics Database connection established.");
-    }
-
-    protected static StatisticsDatabase getInstance() {
-        if (statisticsDatabase == null) {
-            statisticsDatabase = new StatisticsDatabase();
-        }
-        return statisticsDatabase;
     }
     @Override
     protected void sendData() {

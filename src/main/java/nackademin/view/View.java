@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import nackademin.controller.AddBetController;
 import nackademin.controller.LobbyController;
 import nackademin.controller.PrimaryController;
+import nackademin.model.Model;
 import org.controlsfx.control.PopOver;
 
 
@@ -20,11 +21,16 @@ public class View {
     private Parent parent;
     private PopOver pop;
     private PrimaryController primaryController;
+    private Model model;
+
 
     public View(Stage stage)  {
         this.stage = stage;
         stage.setTitle("ankBetLog");
+        model = new Model();
         loadLobbyView();
+
+
 
     }
 
@@ -32,9 +38,11 @@ public class View {
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/primary.fxml"));
-            parent = loader.load();
-            primaryController = loader.getController();
+            primaryController = new PrimaryController();
             primaryController.setView(this);
+            primaryController.setModel(model);
+            loader.setController(primaryController);
+            parent = loader.load();
             stage.setScene(new Scene(parent));
             stage.show();
         } catch (IOException e) {
@@ -46,10 +54,13 @@ public class View {
 
     public void loadLobbyView() {
         try {
+            System.out.println(this);
+            System.out.println(model);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/lobby.fxml"));
             parent = loader.load();
             LobbyController lobbyController = loader.getController();
             lobbyController.setView(this);
+            lobbyController.setModel(model);
             stage.setScene(new Scene(parent));
             stage.show();
         } catch (IOException e) {
@@ -63,6 +74,7 @@ public class View {
             Parent parent = loader.load();
             AddBetController addBetController = loader.getController();
             addBetController.setView(this);
+            addBetController.setModel(model);
             addBetController.setPrimaryController(primaryController);
 
             pop = new PopOver(new Pane(parent));

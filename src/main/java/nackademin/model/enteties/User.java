@@ -1,4 +1,4 @@
-package nackademin.model;
+package nackademin.model.enteties;
 
 public class User {
 

@@ -3,26 +3,21 @@ package nackademin.controller;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import nackademin.model.Bet;
-import nackademin.model.Game;
-import nackademin.model.Statistics;
-import nackademin.model.database.Database;
+import nackademin.model.Model;
+import nackademin.model.enteties.Bet;
+import nackademin.model.enteties.Game;
+import nackademin.model.enteties.Statistics;
 import nackademin.view.View;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 
 public class PrimaryController extends Controller {
 
@@ -52,12 +47,12 @@ public class PrimaryController extends Controller {
 
     private View view;
     private int count;
+    private Model model;
     private ObservableList<DataForTable> bets;
-
 
     public void updateTable(){
         bets_Table.getStyleClass().add("no-header");
-        Bet bet = Database.getBetDatabase().getBets().getLast();
+        Bet bet = model.getBetDatabase().getBets().getLast();
         bets.add(0,new DataForTable(bet, bet.getGame()));
         bets_Table.refresh();
     }
@@ -65,7 +60,7 @@ public class PrimaryController extends Controller {
 
     @FXML
     public void initialize() {
-        name_Label.setText(Database.getUserDatabase().getUser().getUsername());
+        name_Label.setText(model.getUserDatabase().getUser().getUsername());
 
         updateStatistics();
         initTable();
@@ -86,6 +81,12 @@ public class PrimaryController extends Controller {
     @Override
     public void setView(View view) {
         this.view = view;
+    }
+
+    @Override
+    public void setModel(Model model) {
+        this.model = model;
+        System.out.println("prim " + model);
     }
 
     private void initTable() {
@@ -262,7 +263,7 @@ public class PrimaryController extends Controller {
 
     private void populateTable() {
         bets = FXCollections.observableArrayList();
-        for (Bet b : Database.getBetDatabase().getBets()) {
+        for (Bet b : model.getBetDatabase().getBets()) {
             bets.add(new DataForTable(b, b.getGame()));
         }
         bets_Table.setItems(bets);
@@ -287,7 +288,7 @@ public class PrimaryController extends Controller {
     }
 
     private void updateStatistics() {
-        Statistics statistics = Database.getStatisticsDatabase().getStatistics();
+        Statistics statistics = model.getStatisticsDatabase().getStatistics();
         double roi = Math.round(statistics.getRoi() * 100 * 100) / 100;
         roi_Label.setText("ROI:" + roi + "%");
         net_Label.setText("NET:" + statistics.getNet());

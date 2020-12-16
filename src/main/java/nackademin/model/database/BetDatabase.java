@@ -1,26 +1,19 @@
 package nackademin.model.database;
 
-import nackademin.model.Bet;
+import nackademin.model.enteties.Bet;
 import nackademin.observer.Observer;
 
 import java.sql.*;
 import java.util.LinkedList;
 
 public class BetDatabase extends Database implements Observer {
-    private static BetDatabase betDatabase;
+    private StatisticsDatabase statisticsDatabase;
     private LinkedList<Bet> bets;
     private Bet bet;
 
-    private BetDatabase() {
+    public BetDatabase() {
         System.out.println("New Bet Database connection established.");
         bets = new LinkedList<>();
-    }
-
-    protected static BetDatabase getInstance() {
-        if (betDatabase == null) {
-            betDatabase = new BetDatabase();
-        }
-        return betDatabase;
     }
 
     @Override
@@ -85,7 +78,7 @@ public class BetDatabase extends Database implements Observer {
                     );
 
                     bets.getLast().attach(this);
-                    bets.getLast().attach(getStatisticsDatabase());
+                    bets.getLast().attach(statisticsDatabase);
                 }
             }
 
@@ -105,5 +98,9 @@ public class BetDatabase extends Database implements Observer {
     public void update(Object o) {
         bet = (Bet) o;
         sendData();
+    }
+
+    public void setStatisticsDatabase(StatisticsDatabase statisticsDatabase) {
+        this.statisticsDatabase = statisticsDatabase;
     }
 }
