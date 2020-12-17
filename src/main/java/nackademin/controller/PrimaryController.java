@@ -52,8 +52,8 @@ public class PrimaryController implements Controller {
 
 
     public void updateTable(){
-        bets_Table.getStyleClass().add("no-header");
-        Bet bet = model.getBetDatabase().getBets().getLast();
+
+        Bet bet = model.getBetDatabase().getBets().getFirst();
         bets.add(0,new DataForTable(bet, bet.getGame()));
         bets_Table.refresh();
     }
@@ -62,7 +62,7 @@ public class PrimaryController implements Controller {
 
     private void init() {
         name_Label.setText(model.getUserDatabase().getUser().getUsername());
-
+        bets_Table.getStyleClass().add("no-header");
         updateStatistics();
         initTable();
         populateTable();

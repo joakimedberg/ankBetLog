@@ -89,8 +89,7 @@ public class AddBetController implements Controller {
         if (model.getBetDatabase().getBets().isEmpty()) {
             id = 1;
         } else {
-            id = model.getBetDatabase().getBets().getLast().getId() + 1;
-            System.out.println("id " + id);
+            id = model.getBetDatabase().getBets().getFirst().getId() + 1;
         }
 
         Bet b = new Bet(id,date_Label.getText(), sport_Label.getText(), league_Label.getText(), team1_Label.getText(),

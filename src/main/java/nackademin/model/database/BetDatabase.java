@@ -55,6 +55,7 @@ public class BetDatabase extends Database implements Observer {
             Statement statement = SQLiteConnection.getInstance().connect().createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM bets ORDER BY id DESC");
 
+            bets = new LinkedList<>();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 if (bets.isEmpty() || bets.stream().noneMatch(bet -> bet.getId() == id)) {

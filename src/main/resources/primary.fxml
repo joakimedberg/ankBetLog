@@ -18,8 +18,8 @@
                 <TableColumn fx:id="id_Column" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" resizable="false" text="ID" />
                 <TableColumn fx:id="date_Column" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" resizable="false" text="DATE" />
                 <TableColumn fx:id="competition_Column" prefWidth="146.0" resizable="false" text="COMPETITION" />
-                <TableColumn fx:id="game_Column" prefWidth="337.0" resizable="false" text="GAME" />
-                <TableColumn fx:id="odds_Column" maxWidth="50.0" minWidth="1.0" prefWidth="1.0" resizable="false" text="ODDS" />
+                <TableColumn fx:id="game_Column" prefWidth="278.0" resizable="false" text="GAME" />
+                <TableColumn fx:id="odds_Column" maxWidth="60.0" minWidth="1.0" prefWidth="60.0" resizable="false" text="ODDS" />
                 <TableColumn fx:id="stake_Column" prefWidth="87.0" text="STAKE" />
                 <TableColumn fx:id="net_Column" prefWidth="77.0" text="NET" />
             <TableColumn fx:id="edit_Column" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" resizable="false" text="EDIT" />
