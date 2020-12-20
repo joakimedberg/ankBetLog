@@ -1,6 +1,6 @@
 package nackademin.model.database;
 
-import nackademin.model.enteties.Bet;
+import nackademin.model.entity.Bet;
 import nackademin.observer.Observer;
 
 import java.sql.*;

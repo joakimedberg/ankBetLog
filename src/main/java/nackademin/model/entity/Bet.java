@@ -1,4 +1,4 @@
-package nackademin.model.enteties;
+package nackademin.model.entity;
 
 import nackademin.observer.Observer;
 import nackademin.observer.Subject;

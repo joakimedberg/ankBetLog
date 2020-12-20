@@ -1,6 +1,6 @@
 package nackademin.model.database;
 
-import nackademin.model.enteties.User;
+import nackademin.model.entity.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;

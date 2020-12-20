@@ -1,7 +1,7 @@
 package nackademin.model.database;
 
-import nackademin.model.enteties.Bet;
-import nackademin.model.enteties.Statistics;
+import nackademin.model.entity.Bet;
+import nackademin.model.entity.Statistics;
 import nackademin.observer.Observer;
 
 import java.sql.PreparedStatement;

@@ -1,16 +1,14 @@
-package nackademin.model.enteties;
+package nackademin.model.entity;
 
 import nackademin.observer.Observer;
 import nackademin.observer.Subject;
 
 import java.util.ArrayList;
 
-public class Statistics implements Subject {
+public class Statistics  {
 
     private double roi, net, turn;
     private int won, lose, push;
-    private ArrayList<Observer> observers;
-
 
     public Statistics(double net, double turn, double roi, int won, int lose, int push) {
         this.roi = roi;
@@ -20,7 +18,6 @@ public class Statistics implements Subject {
         this.push = push;
         this.turn = turn;
 
-        observers = new ArrayList<>();
     }
 
     public double getTurn() {
@@ -74,18 +71,6 @@ public class Statistics implements Subject {
 
     private void calculateRoi() {
         roi = (net /  turn);
-    }
-
-    @Override
-    public void attach(Observer o) {
-        observers.add(o);
-    }
-
-    @Override
-    public void notifyUpdate() {
-        for (Observer o : observers) {
-            o.update(this);
-        }
     }
 
 }

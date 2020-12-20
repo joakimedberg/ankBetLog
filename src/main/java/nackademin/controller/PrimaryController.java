@@ -11,9 +11,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import nackademin.model.Model;
-import nackademin.model.enteties.Bet;
-import nackademin.model.enteties.Game;
-import nackademin.model.enteties.Statistics;
+import nackademin.model.entity.Bet;
+import nackademin.model.entity.Game;
+import nackademin.model.entity.Statistics;
 import nackademin.view.View;
 
 import java.util.ArrayList;

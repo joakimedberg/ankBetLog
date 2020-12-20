@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import nackademin.model.Model;
-import nackademin.model.enteties.Bet;
+import nackademin.model.entity.Bet;
 import nackademin.view.View;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
